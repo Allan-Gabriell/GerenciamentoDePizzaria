@@ -1,21 +1,13 @@
-#include "include/pedido.h"
-#include "include/pizzas.h"
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
-int main(void){
+int main() {
     char option[10];
     int num;
 
-    FILE *pizzaria = fopen("pizzaria.txt", "ar+");
-    if(pizzaria == NULL){
-        printf("Detectamos erro no arquivo de texto! \n");
-        exit(1);
-    }
-
-    do{
+    do {
         printf("===== Bem vindo ao nosso sistema de pizzaria =====\n");
         printf("Por favor informe um número de acordo com a opção!\n");
         printf("      1. Adicionar pizza\n");
@@ -25,19 +17,19 @@ int main(void){
         printf("      5. Buscar pizza por sabor\n");
         printf("      7. Listar pizzas e quantidade em disponíveis\n");
         printf("      8. Sair do sistema\n");
-        scanf("%d", &option);
+        fgets(option, 10, stdin);
 
-        int isNumber = 1;
+        int isNumber = 1; // Inicializado com 1 (verdadeiro) até que seja provado o contrário
         for(int i = 0; i < strlen(option) - 1; i++){
-            if(!isdigit(option[i])){
-                isNumber = 0;
+            if(!isdigit(option[i])){ // verifica se o digito é um número
+                isNumber = 0; // caso não isNumber vai a 0 para indicar que não é um número 
                 break;
             }
         }
 
-        if(isNumber){
-            num = atoi(option);
-            switch(num){
+        if(isNumber) {
+            num = atoi(option); //converte uma string para um inteiro 
+            switch(num) {
                 case 1:
                 break;
                 case 2:
@@ -59,8 +51,7 @@ int main(void){
         } else {
             printf("A opção informada é inválida. Por favor tente novamente!\n");
         }
-
-    } while(option != 8);
+    } while(num != 8);
 
     return 0;
 }
