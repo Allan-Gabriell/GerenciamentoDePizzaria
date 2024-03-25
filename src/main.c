@@ -1,12 +1,12 @@
-#include "include/pedido.h"
-#include "include/pizzas.h"
+#include "../include/pedido.h"
+#include "../include/pizzas.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 #include <locale.h>
 
-void menu(){
+void menu(OrderPizza *orderList){
     char option[10];
     int num;
     char decision[3];
@@ -43,9 +43,9 @@ void menu(){
                     printf("Deseja adicionar um novo pedido? (s/n) \n");
                     scanf(" %[^\n]", decision);
                     if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
-                        printf("Deu certo \n");
+                        orderList = created_order(orderList);
                     } else {
-                        menu();
+                        menu(orderList);
                     }
                 break;
                 case 4:
@@ -69,13 +69,16 @@ void menu(){
 }
 
 int main(void){
-    setlocale(LC_ALL,"Portuguese");
+    setlocale(LC_ALL,"portuguese");
     FILE *pizzaria = fopen("pizzaria.txt", "ar+");
     if(pizzaria == NULL){
         printf("Detectamos erro no arquivo de texto! \n");
         exit(1);
     }
-    menu();
+
+    OrderPizza *orderList = NULL;
+    menu(orderList);
+
     fclose(pizzaria);
     return 0;
 }
