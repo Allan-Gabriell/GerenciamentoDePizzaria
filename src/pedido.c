@@ -40,3 +40,33 @@ OrderPizza *created_order(OrderPizza *list){
 
     return list;
 }
+
+OrderPizza *remove_order(OrderPizza *list){
+    OrderPizza *aux = list;
+    OrderPizza *aux2 = list;
+    int id;
+
+    printf("Informe o id do pedido que deseja remover: ");
+    scanf("%d", &id);
+    getchar();
+
+    if(list->orders.pizzaId == id){
+        list = list->next;
+        free(aux);
+        printf("Pedido removido com sucesso!\n");
+        return list;
+    } else {
+        while(aux != NULL){
+            if(aux->orders.pizzaId == id){
+                aux2->next = aux->next;
+                free(aux);
+                printf("Pedido removido com sucesso!\n");
+                return list;
+            }
+            aux2 = aux;
+            aux = aux->next;
+        }
+        printf("Infelizmente não foi possível remover esse pedido!\n");
+        return list;
+    }
+}

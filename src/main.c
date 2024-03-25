@@ -17,9 +17,10 @@ void menu(OrderPizza *orderList){
         printf("      1. Adicionar pizza\n");
         printf("      2. Remover pizza\n");
         printf("      3. Adicionar pedido\n");
-        printf("      4. Editar informações de pizza\n");
-        printf("      5. Buscar pizza por sabor\n");
-        printf("      7. Listar pizzas e quantidade em disponíveis\n");
+        printf("      4. Remover pedido\n");
+        printf("      5. Editar informações de pizza\n");
+        printf("      6. Buscar pizza por sabor\n");
+        printf("      7. Listar pizzas e quantidades disponíveis\n");
         printf("      8. Sair do sistema\n");
         printf("==================================================\n");
         scanf("%s", option);
@@ -49,6 +50,13 @@ void menu(OrderPizza *orderList){
                     }
                 break;
                 case 4:
+                    printf("Deseja remover um pedido? (s/n) \n");
+                    scanf(" %[^\n]", decision);
+                    if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
+                        orderList = remove_order(orderList);
+                    } else {
+                        menu(orderList);
+                    }
                 break;
                 case 5:
                 break;
