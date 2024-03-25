@@ -1,4 +1,5 @@
-#include "include/pizzas.h"
+#include "../include/pedido.h"
+#include "../include/pizzas.h"
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -32,7 +33,7 @@ struct listpizza{
 };
 
 
-Pizza *fill_pizza(ListPizza *list){
+ListPizza *fill_pizza(ListPizza *list){
     Pizza pizza;
 
     printf("Por favor informe o sabor da pizza: \n");
@@ -51,6 +52,7 @@ Pizza *fill_pizza(ListPizza *list){
     printf("10 - Brigadeiro\n");
     printf("11 - Romel e Julieta\n");
     scanf("%d", &pizza.flavor);
+    getchar();
 
     printf("Por favor informe o tamanho da pizza: \n");
     printf("1 - P (pequeno)\n");
@@ -58,6 +60,7 @@ Pizza *fill_pizza(ListPizza *list){
     printf("3 - G (grande)\n");
     printf("4 - F (família)\n");
     scanf("%d", &pizza.size);
+    getchar();
 
     ListPizza * newNode = (ListPizza *) malloc(sizeof(ListPizza));
     if(newNode == NULL){
@@ -70,6 +73,8 @@ Pizza *fill_pizza(ListPizza *list){
         newNode->next = list;
         list = newNode;
     } else {
-        printf("Infelizmente não foi possível adicionar um novo pedido! \n");
+        printf("Infelizmente não foi possível adicionar uma nova pizza! \n");
     }
+
+    return list;
 }
