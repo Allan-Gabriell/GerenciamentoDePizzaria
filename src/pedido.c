@@ -5,6 +5,5 @@
 
 struct order{
     int pizzaId;
-    Pizza *orderPizza;
     int qntOrder;
 };

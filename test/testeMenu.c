@@ -1,13 +1,15 @@
-#include <stdio.h>
+#include "include/pedido.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <string.h>
 #include <ctype.h>
 
-int main() {
+void menu(){
     char option[10];
     int num;
+    char decision[3];
 
-    do {
+    do{
         printf("===== Bem vindo ao nosso sistema de pizzaria =====\n");
         printf("Por favor informe um número de acordo com a opção!\n");
         printf("      1. Adicionar pizza\n");
@@ -17,24 +19,24 @@ int main() {
         printf("      5. Buscar pizza por sabor\n");
         printf("      7. Listar pizzas e quantidade em disponíveis\n");
         printf("      8. Sair do sistema\n");
-        fgets(option, 10, stdin);
+        scanf("%s", option);
 
-        int isNumber = 1; // Inicializado com 1 (verdadeiro) até que seja provado o contrário
-        for(int i = 0; i < strlen(option); i++){
-            if(!isdigit(option[i])){ // verifica se o digito é um número
-                isNumber = 0; // caso não isNumber vai a 0 para indicar que não é um número 
-                break;
-            }
-        }
-
-        if(isNumber) {
-            num = atoi(option); //converte uma string para um inteiro 
-            switch(num) {
+        if(justNumber(option)){
+            num = atoi(option);
+            switch(num){
                 case 1:
                 break;
                 case 2:
                 break;
                 case 3:
+                    printf("Deseja adicionar um novo pedido? (s/n) \n");
+                    scanf(" %[^\n]", decision);
+                    if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
+                        printf("Deu certo \n");
+                    } else {
+                        menu();
+                    }
+                break;
                 case 4:
                 break;
                 case 5:
@@ -51,7 +53,18 @@ int main() {
         } else {
             printf("A opção informada é inválida. Por favor tente novamente!\n");
         }
-    } while(num != 8);
+
+    } while(num != 8);    
+}
+
+int main(void){
+    FILE *pizzaria = fopen("pizzaria.txt", "ar+");
+    if(pizzaria == NULL){
+        printf("Detectamos erro no arquivo de texto! \n");
+        exit(1);
+    }
+
+    menu();
 
     return 0;
 }

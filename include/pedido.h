@@ -1,2 +1,3 @@
-//Renomeando a struct dos pedidos
-typedef struct pedido Pedido;
+#include "include/pizzas.h"
+
+typedef struct order Order;
