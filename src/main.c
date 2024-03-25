@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <locale.h>
 
 void menu(){
     char option[10];
@@ -20,6 +21,7 @@ void menu(){
         printf("      5. Buscar pizza por sabor\n");
         printf("      7. Listar pizzas e quantidade em disponíveis\n");
         printf("      8. Sair do sistema\n");
+        printf("==================================================\n");
         scanf("%s", option);
 
         int isNumber = 1;
@@ -67,13 +69,13 @@ void menu(){
 }
 
 int main(void){
+    setlocale(LC_ALL,"Portuguese");
     FILE *pizzaria = fopen("pizzaria.txt", "ar+");
     if(pizzaria == NULL){
         printf("Detectamos erro no arquivo de texto! \n");
         exit(1);
     }
-
     menu();
-
+    fclose(pizzaria);
     return 0;
 }
