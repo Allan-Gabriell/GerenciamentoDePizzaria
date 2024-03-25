@@ -5,15 +5,10 @@
 #include <string.h>
 #include <ctype.h>
 
-int main(void){
+void menu(){
     char option[10];
     int num;
-
-    FILE *pizzaria = fopen("pizzaria.txt", "ar+");
-    if(pizzaria == NULL){
-        printf("Detectamos erro no arquivo de texto! \n");
-        exit(1);
-    }
+    char decision[3];
 
     do{
         printf("===== Bem vindo ao nosso sistema de pizzaria =====\n");
@@ -25,10 +20,10 @@ int main(void){
         printf("      5. Buscar pizza por sabor\n");
         printf("      7. Listar pizzas e quantidade em disponíveis\n");
         printf("      8. Sair do sistema\n");
-        scanf("%d", &option);
+        scanf("%s", option);
 
         int isNumber = 1;
-        for(int i = 0; i < strlen(option) - 1; i++){
+        for(int i = 0; i < strlen(option); i++){
             if(!isdigit(option[i])){
                 isNumber = 0;
                 break;
@@ -43,6 +38,14 @@ int main(void){
                 case 2:
                 break;
                 case 3:
+                    printf("Deseja adicionar um novo pedido? (s/n) \n");
+                    scanf(" %[^\n]", decision);
+                    if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
+                        printf("Deu certo \n");
+                    } else {
+                        menu();
+                    }
+                break;
                 case 4:
                 break;
                 case 5:
@@ -60,7 +63,17 @@ int main(void){
             printf("A opção informada é inválida. Por favor tente novamente!\n");
         }
 
-    } while(option != 8);
+    } while(num != 8);    
+}
+
+int main(void){
+    FILE *pizzaria = fopen("pizzaria.txt", "ar+");
+    if(pizzaria == NULL){
+        printf("Detectamos erro no arquivo de texto! \n");
+        exit(1);
+    }
+
+    menu();
 
     return 0;
 }
