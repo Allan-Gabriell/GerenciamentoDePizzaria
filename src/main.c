@@ -46,12 +46,27 @@ void menu(Node **head){
                     }
                 break;
                 case 2:
+                    printf("Deseja remover uma pizza? (s/n) \n");
+                    scanf(" %[^\n]", decision);
+                    if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
+                        *head = removePizza(*head);
+                    } else {
+                        menu(head);
+                    }
                 break;
                 case 3:
                 break;
                 case 4:
                 break;
                 case 5:
+                    printf("Deseja editar uma pizza? (s/n) \n");
+                    scanf(" %[^\n]", decision);
+                    if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
+                        editPizza(*head);
+                        printList(*head);
+                    } else {
+                        menu(head);
+                    }
                 break;
                 case 6:
                 break;
