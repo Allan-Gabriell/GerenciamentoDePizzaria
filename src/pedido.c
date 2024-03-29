@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct order{
+/*struct order{
     int pizzaId;
     int qntOrder;
     ListPizza *list;
@@ -70,3 +70,4 @@ OrderPizza *remove_order(OrderPizza *list){
         return list;
     }
 }
+*/

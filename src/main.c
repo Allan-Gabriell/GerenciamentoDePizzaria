@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include <locale.h>
 
-void menu(OrderPizza *orderList){
+void menu(Node **head){
     char option[10];
     int num;
     char decision[3];
@@ -37,26 +37,19 @@ void menu(OrderPizza *orderList){
             num = atoi(option);
             switch(num){
                 case 1:
+                    printf("Deseja adicionar uma nova pizza? (s/n) \n");
+                    scanf(" %[^\n]", decision);
+                    if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
+                        *head = addPizza(*head);
+                    } else {
+                        menu(head);
+                    }
                 break;
                 case 2:
                 break;
                 case 3:
-                    printf("Deseja adicionar um novo pedido? (s/n) \n");
-                    scanf(" %[^\n]", decision);
-                    if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
-                        orderList = created_order(orderList);
-                    } else {
-                        menu(orderList);
-                    }
                 break;
                 case 4:
-                    printf("Deseja remover um pedido? (s/n) \n");
-                    scanf(" %[^\n]", decision);
-                    if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
-                        orderList = remove_order(orderList);
-                    } else {
-                        menu(orderList);
-                    }
                 break;
                 case 5:
                 break;
@@ -84,8 +77,8 @@ int main(void){
         exit(1);
     }
 
-    OrderPizza *orderList = NULL;
-    menu(orderList);
+    Node *pizzaList = NULL;
+    menu(&pizzaList);
 
     fclose(pizzaria);
     return 0;
