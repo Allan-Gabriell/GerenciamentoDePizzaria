@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <string.h>
 
+int qtdInStocktotal = 0;
+
 struct node{
     Pizza pizza;
     struct node *next;
@@ -20,6 +22,8 @@ Node *addPizza(Node *list){
         scanf("%f", &newPizza.price);
         printf("Informe uma descrição da pizza: \n");
         scanf(" %[^\n]", newPizza.description);
+        printf("Informe a quantidade em estoque: ");
+        scanf("%d", &newPizza.qtdInStock);
 
         Node *newNode = (Node *) malloc(sizeof(Node));
         if(newNode == NULL){
@@ -36,6 +40,8 @@ Node *addPizza(Node *list){
         } else {
             printf("Erro ao adicionar novo sabor!\n");
         }
+
+        qtdInStocktotal += newPizza.qtdInStock;
 
         printf("Deseja adicionar mais sabor? (S/N): ");
         scanf(" %[^\n]", decision);
@@ -57,13 +63,15 @@ void printList(Node *list){
 
     printf("Lista de pizzas:\n");
     Node *aux = list;
-    while(list != NULL){
+    while(aux != NULL){
         printf("Sabor: %s\n", aux->pizza.flavor);
         printf("Valor: %.2f\n", aux->pizza.price);
         printf("Descrição: %s\n", aux->pizza.description);
+        printf("Quantidade em estoque: %d\n", aux->pizza.qtdInStock);
         printf("\n");
         aux = aux->next;
     }
+    printf("Quantidade em estoque total: %d\n", qtdInStocktotal);
 }
 
 Node *removePizza(Node *list){
@@ -102,6 +110,7 @@ Node *removePizza(Node *list){
 
 void editPizza(Node *list){
     char decision[3];
+    int newQtdInStock;
     do {
         char flavor[50];
         printf("Informe o sabor da pizza a ser editada: ");
@@ -114,6 +123,15 @@ void editPizza(Node *list){
                 scanf("%f", &aux->pizza.price);
                 printf("Informe a nova descrição: ");
                 scanf(" %[^\n]", aux->pizza.description);
+                printf("Deseja adicionar mais pizzas ao estoque? ");
+                scanf(" %[^\n]", decision);
+                if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
+                    printf("Informe a quantidade a ser adicionada: ");
+                    scanf("%d", &newQtdInStock);
+                    qtdInStocktotal -= aux->pizza.qtdInStock;
+                    aux->pizza.qtdInStock += newQtdInStock; 
+                    qtdInStocktotal += aux->pizza.qtdInStock; 
+                }
                 printf("Sabor editado com sucesso!\n");
                 break;
             }
@@ -124,6 +142,34 @@ void editPizza(Node *list){
         }
 
         printf("Deseja editar outro sabor? (s/n) \n");
+        scanf(" %[^\n]", decision);
+    } while(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0);
+}
+
+void searchPizzaByName(Node *list){
+    char decision[3];
+    do {
+        char flavor[50];
+        printf("Informe o sabor da pizza a ser buscada: ");
+        scanf(" %[^\n]", flavor);
+
+        Node *aux = list;
+        while(aux != NULL){
+            if(strcmp(aux->pizza.flavor, flavor) == 0){
+                printf("Sabor: %s\n", aux->pizza.flavor);
+                printf("Valor: %.2f\n", aux->pizza.price);
+                printf("Descrição: %s\n", aux->pizza.description);
+                printf("Quantidade em estoque: %d\n", aux->pizza.qtdInStock);
+                printf("\n");
+                break;
+            }
+            aux = aux->next;
+        }
+        if(aux == NULL){
+            printf("Sabor não encontrado!\n");
+        }
+
+        printf("Deseja buscar outra pizza? (s/n) \n");
         scanf(" %[^\n]", decision);
     } while(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0);
 }

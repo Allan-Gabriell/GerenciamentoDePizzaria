@@ -63,12 +63,19 @@ void menu(Node **head){
                     scanf(" %[^\n]", decision);
                     if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
                         editPizza(*head);
-                        printList(*head);
                     } else {
                         menu(head);
                     }
                 break;
                 case 6:
+                    printf("Deseja buscar pizza por sabor? (s/n) \n");
+                    scanf(" %[^\n]", decision);
+                    if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
+                        searchPizzaByName(*head);
+                        printList(*head);
+                    } else {
+                        menu(head);
+                    }
                 break;
                 case 7:
                 break;

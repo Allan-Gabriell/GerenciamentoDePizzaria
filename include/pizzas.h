@@ -10,6 +10,7 @@ struct pizza{
     Size size;
     float price;
     int qtdInStock;
+    int qtdInStocktotal;
 };
 
 typedef struct pizza Pizza;
@@ -20,3 +21,4 @@ int listNull(Node *list);
 void printList(Node *list);
 Node *removePizza(Node *list);
 void editPizza(Node *list);
+void searchPizzaByName(Node *list);
