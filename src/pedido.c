@@ -3,17 +3,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-/*struct order{
-    int pizzaId;
-    int qntOrder;
-    ListPizza *list;
+struct order{
+    int pizzaId;    // Identificação
+    int qntOrder;   // Total de Pedido
+    Pizza *list;    // Lista de Pizzas Pedidas
 };
 
-struct orderpizza{
+struct orderpizza{  // Fila de Pizzas
     Order orders;
     struct orderpizza *next;
 };
 
+OrderPizza *create_order(){  //Criar fila vazia
+    return NULL;
+}
+int empty_queue(OrderPizza *queue){ // Fila Vazia
+    return (queue == NULL);
+}
+
+OrderPizza *addorder(OrderPizza *queue, Order neworder){ //Adicionar nova ordem
+    OrderPizza *new = (OrderPizza *) malloc (sizeof(OrderPizza));
+    new->orders = neworder;
+    new->next = NULL;
+    if (empty_queue(queue)){
+        return new;
+    }
+    OrderPizza *aux = queue;
+    while (aux->next != NULL){
+        aux = aux->next;
+    }
+    aux->next = new;
+    return queue;
+}
+
+
+/*
 OrderPizza *created_order(OrderPizza *list){
     Order orders;
     int qtdpizzas;
