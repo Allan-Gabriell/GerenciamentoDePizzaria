@@ -6,7 +6,7 @@
 #include <ctype.h>
 #include <locale.h>
 
-void menu(Node **head){
+void menu(Node **head, FILE *pizzas){
     char option[10];
     int num;
     char decision[3];
@@ -40,18 +40,18 @@ void menu(Node **head){
                     printf("Deseja adicionar uma nova pizza? (s/n) \n");
                     scanf(" %[^\n]", decision);
                     if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
-                        *head = addPizza(*head);
+                        *head = addPizza(*head, pizzas);
                     } else {
-                        menu(head);
+                        menu(head, pizzas);
                     }
                 break;
                 case 2:
                     printf("Deseja remover uma pizza? (s/n) \n");
                     scanf(" %[^\n]", decision);
                     if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
-                        *head = removePizza(*head);
+                        *head = removePizza(*head, pizzas);
                     } else {
-                        menu(head);
+                        menu(head, pizzas);
                     }
                 break;
                 case 3:
@@ -62,9 +62,9 @@ void menu(Node **head){
                     printf("Deseja editar uma pizza? (s/n) \n");
                     scanf(" %[^\n]", decision);
                     if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
-                        editPizza(*head);
+                        editPizza(*head, pizzas);
                     } else {
-                        menu(head);
+                        menu(head, pizzas);
                     }
                 break;
                 case 6:
@@ -74,7 +74,7 @@ void menu(Node **head){
                         searchPizzaByName(*head);
                         printList(*head);
                     } else {
-                        menu(head);
+                        menu(head, pizzas);
                     }
                 break;
                 case 7:
@@ -93,15 +93,16 @@ void menu(Node **head){
 
 int main(void){
     setlocale(LC_ALL,"portuguese");
-    FILE *pizzaria = fopen("pizzaria.txt", "ar+");
-    if(pizzaria == NULL){
+    FILE *pizzas = fopen("pizzas.txt", "ar+");
+    if(pizzas == NULL){
         printf("Detectamos erro no arquivo de texto! \n");
         exit(1);
     }
 
     Node *pizzaList = NULL;
-    menu(&pizzaList);
+    menu(&pizzaList, pizzas);
+    printTxt(pizzaList, pizzas);
 
-    fclose(pizzaria);
+    fclose(pizzas);
     return 0;
 }

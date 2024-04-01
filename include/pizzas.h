@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 enum size{
     P = 1, M, G, F
 };
@@ -16,9 +18,10 @@ struct pizza{
 typedef struct pizza Pizza;
 typedef struct node Node;
 
-Node *addPizza(Node *list);
+Node *addPizza(Node *list, FILE *file);
 int listNull(Node *list);
 void printList(Node *list);
-Node *removePizza(Node *list);
-void editPizza(Node *list);
+Node *removePizza(Node *list, FILE *file);
+void editPizza(Node *list, FILE *file);
 void searchPizzaByName(Node *list);
+void printTxt(Node *list, FILE *file);
