@@ -1,32 +1,26 @@
 Lista de pizzas:
-Sabor: Peperone
-Valor: 45.00
-Descrição: Peperone
-Quantidade em estoque: 50
-Estoque total: 50
+Sabor: Romeu e Julieta
+Valor: 5.00
+Descrição: sksk
+Quantidade em estoque: 7
 
 Lista de pizzas:
-Sabor: Picles
+Sabor: Frango com Catupiri
 Valor: 45.00
-Descrição: kkk
+Descrição: ksksk
 Quantidade em estoque: 5
 
-Estoque total: 5
-Lista de pizzas:
-Sabor: Portuguesa
-Valor: 45.00
-Descrição: sss
-Quantidade em estoque: 8
 
 Lista de pizzas:
-Sabor: Chocolate
-Valor: 78.00
+Sabor: Romeu e Julieta
+Valor: 5.00
 Descrição: sksk
-Quantidade em estoque: 6
+Quantidade em estoque: 7
 
 Lista de pizzas:
-Sabor: Chocolate
+Sabor: Frango com Catupiri
 Valor: 45.00
-Descrição: lllll
-Quantidade em estoque: 6
+Descrição: ksksks
+Quantidade em estoque: 5
+
 

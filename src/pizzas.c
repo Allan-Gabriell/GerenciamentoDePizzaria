@@ -187,3 +187,22 @@ void printTxt(Node *list, FILE *file){
     }
     printTxt(newList->next, file);
 }
+
+Node *loadPizzas(FILE *file){
+    Node *list = NULL;
+    Pizza newPizza;
+
+    while(fscanf(file, "Lista de pizzas:\nSabor: %[^\n]\nValor: %f\nDescrição: %[^\n]\nQuantidade em estoque: %d\n\n", newPizza.flavor, &newPizza.price, newPizza.description, &newPizza.qtdInStock) == 4) {
+        Node *newNode = (Node *) malloc(sizeof(Node));
+        if(newNode == NULL){
+            printf("Erro ao alocar memoria");
+            return list;
+            exit(1);
+        }
+        newNode->pizza = newPizza;
+        newNode->next = list;
+        list = newNode;
+    }
+
+    return list;
+} 

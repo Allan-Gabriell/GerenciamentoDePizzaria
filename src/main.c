@@ -99,7 +99,7 @@ int main(void){
         exit(1);
     }
 
-    Node *pizzaList = NULL;
+    Node *pizzaList = loadPizzas(pizzas);
     menu(&pizzaList, pizzas);
 
 

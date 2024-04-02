@@ -6,6 +6,7 @@
 struct order{
     int pizzaId;    // Identificação
     int qntOrder;   // Total de Pedido
+    Size size;
     Pizza *list;    // Lista de Pizzas Pedidas
 };
 
