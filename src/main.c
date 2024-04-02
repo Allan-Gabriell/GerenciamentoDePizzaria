@@ -93,13 +93,13 @@ void menu(Node **head, FILE *pizzas){
 
 int main(void){
     setlocale(LC_ALL,"portuguese");
-    FILE *pizzas = fopen("pizzas.txt", "ar+");
+    FILE *pizzas = fopen("pizzas.txt", "a+");
     if(pizzas == NULL){
         printf("Detectamos erro no arquivo de texto! \n");
         exit(1);
     }
 
-    Node *pizzaList = NULL;
+    Node *pizzaList = loadPizzas(pizzas);
     menu(&pizzaList, pizzas);
 
 

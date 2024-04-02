@@ -1,32 +1,40 @@
 Lista de pizzas:
-Sabor: Peperone
+Sabor: Frango com catupiry
 Valor: 45.00
-Descrição: Peperone
-Quantidade em estoque: 50
-Estoque total: 50
-
-Lista de pizzas:
-Sabor: Picles
-Valor: 45.00
-Descrição: kkk
+Descrição: É uma pizza de frango com catupiry
 Quantidade em estoque: 5
 
-Estoque total: 5
 Lista de pizzas:
-Sabor: Portuguesa
+Sabor: Banana com Goiba
+Valor: 12.29
+Descrição: É um pizza de banana com goiaba
+Quantidade em estoque: 12
+
+Sabor: Frango com catupiry
 Valor: 45.00
-Descrição: sss
-Quantidade em estoque: 8
+Descrição: É uma pizza de frango com catupiry
+Quantidade em estoque: 5Lista de pizzas:
+Sabor: Ovo
+Valor: 5.00
+Descrição: ovo
+Quantidade em estoque: 5
 
 Lista de pizzas:
-Sabor: Chocolate
-Valor: 78.00
-Descrição: sksk
-Quantidade em estoque: 6
+Sabor: Banana com Goiba
+Valor: 12.29
+Descrição: É um pizza de banana com goiaba
+Quantidade em estoque: 12
 
 Lista de pizzas:
-Sabor: Chocolate
+Sabor: Frango com catupiry
 Valor: 45.00
-Descrição: lllll
-Quantidade em estoque: 6
+Descrição: É uma pizza de frango com catupiry
+Quantidade em estoque: 5
+
+Lista de pizzas:
+Sabor: Banana com Goiba
+Valor: 12.29
+Descrição: É um pizza de banana com goiaba
+Quantidade em estoque: 12
+
 

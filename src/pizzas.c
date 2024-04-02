@@ -36,6 +36,7 @@ Node *addPizza(Node *list, FILE *file){
             list = newNode;
 
             printf("Novo sabor adicionado com sucesso!\n");
+            printList(list);
         } else {
             printf("Erro ao adicionar novo sabor!\n");
         }
@@ -45,21 +46,18 @@ Node *addPizza(Node *list, FILE *file){
 
     }while(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "SIM") == 0);
 
+    fflush(stdout);
     printTxt(list, file);
     return list;
 }
 
-int listNull(Node *list){
-    return (list == NULL);
-}
-
 void printList(Node *list){
-    if(listNull(list)){
+    if(list == NULL){
         printf("Lista vazia!\n");
         return;
     }
 
-    printf("Lista de pizzas:\n");
+    printf("\nLista de pizzas:\n");
     Node *aux = list;
     while(aux != NULL){
         printf("Sabor: %s\n", aux->pizza.flavor);
@@ -187,3 +185,22 @@ void printTxt(Node *list, FILE *file){
     }
     printTxt(newList->next, file);
 }
+
+Node *loadPizzas(FILE *file){
+    Node *list = NULL;
+    Pizza newPizza;
+
+    while(fscanf(file, "Lista de pizzas:\nSabor: %[^\n]\nValor: %f\nDescrição: %[^\n]\nQuantidade em estoque: %d\n\n", newPizza.flavor, &newPizza.price, newPizza.description, &newPizza.qtdInStock) == 4) {
+        Node *newNode = (Node *) malloc(sizeof(Node));
+        if(newNode == NULL){
+            printf("Erro ao alocar memoria");
+            return list;
+            exit(1);
+        }
+        newNode->pizza = newPizza;
+        newNode->next = list;
+        list = newNode;
+    }
+
+    return list;
+} 
