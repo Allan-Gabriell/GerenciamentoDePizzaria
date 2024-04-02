@@ -101,7 +101,7 @@ int main(void){
 
     Node *pizzaList = NULL;
     menu(&pizzaList, pizzas);
-    printTxt(pizzaList, pizzas);
+
 
     fclose(pizzas);
     return 0;

@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 
-int qtdInStocktotal = 0;
 
 struct node{
     Pizza pizza;
@@ -41,8 +40,6 @@ Node *addPizza(Node *list, FILE *file){
             printf("Erro ao adicionar novo sabor!\n");
         }
 
-        qtdInStocktotal += newPizza.qtdInStock;
-
         printf("Deseja adicionar mais sabor? (S/N): ");
         scanf(" %[^\n]", decision);
 
@@ -72,7 +69,6 @@ void printList(Node *list){
         printf("\n");
         aux = aux->next;
     }
-    printf("Quantidade em estoque total: %d\n", qtdInStocktotal);
 }
 
 Node *removePizza(Node *list, FILE *file){
@@ -131,7 +127,6 @@ void editPizza(Node *list, FILE *file){
                     printf("Informe a quantidade a ser adicionada: ");
                     scanf("%d", &newQtdInStock);
                         aux->pizza.qtdInStock += newQtdInStock;
-                        qtdInStocktotal += newQtdInStock;
                 }
                 printf("Sabor editado com sucesso!\n");
                 break;
@@ -142,11 +137,11 @@ void editPizza(Node *list, FILE *file){
             printf("Sabor não encontrado!\n");
         }
 
-        printTxt(list, file);
-
         printf("Deseja editar outro sabor? (s/n) \n");
         scanf(" %[^\n]", decision);
     } while(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0);
+    
+    printTxt(list, file);
 }
 
 void searchPizzaByName(Node *list){
@@ -163,7 +158,6 @@ void searchPizzaByName(Node *list){
                 printf("Valor: %.2f\n", aux->pizza.price);
                 printf("Descrição: %s\n", aux->pizza.description);
                 printf("Quantidade em estoque: %d\n", aux->pizza.qtdInStock);
-                printf("\n");
                 break;
             }
             aux = aux->next;
@@ -189,7 +183,7 @@ void printTxt(Node *list, FILE *file){
         fprintf(file, "Valor: %.2f\n", list->pizza.price);
         fprintf(file, "Descrição: %s\n", list->pizza.description);
         fprintf(file, "Quantidade em estoque: %d\n", list->pizza.qtdInStock);
-        fprintf(file, "Estoque total: %d\n", qtdInStocktotal);
+        fprintf(file, "\n");
     }
     printTxt(newList->next, file);
 }

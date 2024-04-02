@@ -1,0 +1,32 @@
+Lista de pizzas:
+Sabor: Peperone
+Valor: 45.00
+Descrição: Peperone
+Quantidade em estoque: 50
+Estoque total: 50
+
+Lista de pizzas:
+Sabor: Picles
+Valor: 45.00
+Descrição: kkk
+Quantidade em estoque: 5
+
+Estoque total: 5
+Lista de pizzas:
+Sabor: Portuguesa
+Valor: 45.00
+Descrição: sss
+Quantidade em estoque: 8
+
+Lista de pizzas:
+Sabor: Chocolate
+Valor: 78.00
+Descrição: sksk
+Quantidade em estoque: 6
+
+Lista de pizzas:
+Sabor: Chocolate
+Valor: 45.00
+Descrição: lllll
+Quantidade em estoque: 6
+
