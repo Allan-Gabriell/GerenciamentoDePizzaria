@@ -69,3 +69,4 @@ Projeto desenvolvido como avaliação da terceira unidade da disciplina: Algorit
 * [Allan Gabriel Silva Freitas](https://github.com/Allan-Gabriell)
 * [Leonardo Augusto Silva de Sousa](https://github.com/LeonardAugusto)
 ## Fontes
+* [CodeWhisperer](https://aws.amazon.com/pt/codewhisperer/)

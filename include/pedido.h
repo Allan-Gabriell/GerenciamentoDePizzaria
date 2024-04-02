@@ -1,9 +1,10 @@
 typedef struct order Order;
-typedef struct orderpizza OrderPizza;
+typedef struct pizzaorder PizzaOrder;
 
 /*
-OrderPizza *create_order();
-int empty_queue(OrderPizza *queue);
-OrderPizza *addorder(OrderPizza *queue, int i);
-
+PizzaOrder *create_order();
+int empty_queue(PizzaOrder *queue);
+PizzaOrder *addorder (PizzaOrder *queue, Order neworder);
+PizzaOrder *removeorder(PizzaOrder *queue);
+void print_order (PizzaOrder *queue);
 */
