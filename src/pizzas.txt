@@ -1,26 +1,40 @@
 Lista de pizzas:
-Sabor: Romeu e Julieta
-Valor: 5.00
-Descrição: sksk
-Quantidade em estoque: 7
-
-Lista de pizzas:
-Sabor: Frango com Catupiri
+Sabor: Frango com catupiry
 Valor: 45.00
-Descrição: ksksk
+Descrição: É uma pizza de frango com catupiry
 Quantidade em estoque: 5
 
-
 Lista de pizzas:
-Sabor: Romeu e Julieta
-Valor: 5.00
-Descrição: sksk
-Quantidade em estoque: 7
+Sabor: Banana com Goiba
+Valor: 12.29
+Descrição: É um pizza de banana com goiaba
+Quantidade em estoque: 12
 
-Lista de pizzas:
-Sabor: Frango com Catupiri
+Sabor: Frango com catupiry
 Valor: 45.00
-Descrição: ksksks
+Descrição: É uma pizza de frango com catupiry
+Quantidade em estoque: 5Lista de pizzas:
+Sabor: Ovo
+Valor: 5.00
+Descrição: ovo
 Quantidade em estoque: 5
+
+Lista de pizzas:
+Sabor: Banana com Goiba
+Valor: 12.29
+Descrição: É um pizza de banana com goiaba
+Quantidade em estoque: 12
+
+Lista de pizzas:
+Sabor: Frango com catupiry
+Valor: 45.00
+Descrição: É uma pizza de frango com catupiry
+Quantidade em estoque: 5
+
+Lista de pizzas:
+Sabor: Banana com Goiba
+Valor: 12.29
+Descrição: É um pizza de banana com goiaba
+Quantidade em estoque: 12
 
 
