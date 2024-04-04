@@ -4,7 +4,8 @@ enum size{
 
 typedef enum size Size;
 typedef struct order Order;
-typedef struct pizzaorder PizzaOrder;
+typedef struct orderpizza OrderPizza;
+
 
 /*
 PizzaOrder *create_order();

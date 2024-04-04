@@ -1,7 +1,5 @@
 #include <stdio.h>
 
-typedef enum size Size;
-
 struct pizza{
     char flavor[50];
     char description[500];
@@ -22,3 +20,4 @@ void searchPizzaByName(Node *list);
 void printTxt(Node *list, FILE *file);
 
 Node *loadPizzas(FILE *file);
+void clearFileContents(const char *filename);

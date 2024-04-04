@@ -100,6 +100,9 @@ int main(void){
     }
 
     Node *pizzaList = loadPizzas(pizzas);
+    fclose(pizzas);
+    clearFileContents("pizzas.txt");
+    pizzas = fopen("pizzas.txt", "a");
     menu(&pizzaList, pizzas);
 
 
