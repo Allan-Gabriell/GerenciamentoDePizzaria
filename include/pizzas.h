@@ -21,3 +21,4 @@ void printTxt(Node *list, FILE *file);
 
 Node *loadPizzas(FILE *file);
 void clearFileContents(const char *filename);
+void printListPizzas(Node *list);
