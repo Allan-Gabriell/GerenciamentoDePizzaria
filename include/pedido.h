@@ -1,8 +1,4 @@
-enum size{
-    P = 1, M, G, F
-};
 
-typedef enum size Size;
 typedef struct order Order;
 typedef struct orderpizza OrderPizza;
 

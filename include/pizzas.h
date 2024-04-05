@@ -1,9 +1,9 @@
 #include <stdio.h>
-
 struct pizza{
     char flavor[50];
     char description[500];
     float price;
+    int size;
     int qtdInStock;
     int qtdInStocktotal;
 };

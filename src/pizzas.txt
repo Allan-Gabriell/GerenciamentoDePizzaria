@@ -1,0 +1,44 @@
+Lista de pizzas:
+Sabor: Anchovas
+Valor: 66.00
+Descrição: kdks
+Tamanho: M
+Quantidade em estoque: 7
+
+Lista de pizzas:
+Sabor: Andromeda
+Valor: 41.00
+Descrição: ksks
+Tamanho: G
+Quantidade em estoque: 8
+
+Lista de pizzas:
+Sabor: catupyri
+Valor: 55.00
+Descrição: ksks
+Tamanho: F
+Quantidade em estoque: 8
+
+
+Lista de pizzas:
+Sabor: Anchovas
+Valor: 66.00
+Descrição: kdks
+Tamanho: M
+Quantidade em estoque: 7
+
+Lista de pizzas:
+Sabor: Andromeda
+Valor: 41.50
+Descrição: kskss
+Tamanho: F
+Quantidade em estoque: 10
+
+Lista de pizzas:
+Sabor: catupyri
+Valor: 55.00
+Descrição: ksks
+Tamanho: F
+Quantidade em estoque: 8
+
+

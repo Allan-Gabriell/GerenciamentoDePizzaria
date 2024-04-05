@@ -26,6 +26,8 @@ Node *addPizza(Node *list, FILE *file){
         scanf(" %[^\n]", newPizza.flavor);
         printf("Informe o valor da pizza: ");
         scanf("%f", &newPizza.price);
+        printf("Informe o tamanho da pizza:\n1 - P\n2 - M\n3 - G\n4 - G");
+        scanf("%d", &newPizza.size);
         printf("Informe uma descrição da pizza: \n");
         scanf(" %[^\n]", newPizza.description);
         printf("Informe a quantidade em estoque: ");
@@ -76,7 +78,24 @@ void printList(Node *list){
     while(aux != NULL){
         printf("Sabor: %s\n", aux->pizza.flavor);
         printf("Valor: %.2f\n", aux->pizza.price);
+        printf("Tamanho: %d\n", aux->pizza.size);
         printf("Descrição: %s\n", aux->pizza.description);
+        switch(aux->pizza.size){
+            case 1:
+            printf("Tamanha: P\n");
+            break;
+            case 2:
+            printf("Tamanho: M\n");
+            break;
+            case 3:
+            printf("Tamanho: G\n");
+            break;
+            case 4:
+            printf("Tamanho: F\n");
+            break;
+            default:
+            printf("Tamanho desconhecido!\n");
+        }
         printf("Quantidade em estoque: %d\n", aux->pizza.qtdInStock);
         printf("\n");
         aux = aux->next;
@@ -141,6 +160,7 @@ Node *removePizza(Node *list, FILE *file){
 void editPizza(Node *list, FILE *file){
     char decision[3];
     int newQtdInStock;
+    int tempSize;
     do {
         char flavor[50];
         printf("Informe o sabor da pizza a ser editada: ");
@@ -153,6 +173,9 @@ void editPizza(Node *list, FILE *file){
                 scanf("%f", &aux->pizza.price);
                 printf("Informe a nova descrição: ");
                 scanf(" %[^\n]", aux->pizza.description);
+                printf("Informe o novo tamanho da pizza:\n1 - P\n2 - M\n3 - G\n4 - G");
+                scanf("%d", &tempSize);
+                aux->pizza.size = tempSize;
                 printf("Deseja adicionar mais pizzas ao estoque? (s/n) ");
                 scanf(" %[^\n]", decision);
                 if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
@@ -215,6 +238,23 @@ void printTxt(Node *list, FILE *file){
         fprintf(file, "Sabor: %s\n", list->pizza.flavor);
         fprintf(file, "Valor: %.2f\n", list->pizza.price);
         fprintf(file, "Descrição: %s\n", list->pizza.description);
+         fprintf(file, "Tamanho: ");
+        switch(list->pizza.size) {
+            case 1:
+                fprintf(file, "P\n");
+                break;
+            case 2:
+                fprintf(file, "M\n");
+                break;
+            case 3:
+                fprintf(file, "G\n");
+                break;
+            case 4:
+                fprintf(file, "F\n");
+                break;
+            default:
+                fprintf(file, "Tamanho desconhecido\n");
+        }
         fprintf(file, "Quantidade em estoque: %d\n", list->pizza.qtdInStock);
         fprintf(file, "\n");
     }
