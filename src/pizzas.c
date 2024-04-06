@@ -26,7 +26,7 @@ Node *addPizza(Node *list, FILE *file){
         scanf(" %[^\n]", newPizza.flavor);
         printf("Informe o valor da pizza: ");
         scanf("%f", &newPizza.price);
-        printf("Informe o tamanho da pizza:\n1 - P\n2 - M\n3 - G\n4 - G");
+        printf("Informe o tamanho da pizza:\n1 - P\n2 - M\n3 - G\n4 - F\n");
         scanf("%d", &newPizza.size);
         printf("Informe uma descrição da pizza: \n");
         scanf(" %[^\n]", newPizza.description);
