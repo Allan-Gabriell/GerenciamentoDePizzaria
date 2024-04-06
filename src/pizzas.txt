@@ -1,8 +1,22 @@
 Lista de pizzas:
-Sabor: Doce de Leite ao quadrado
-Valor: 34,50
-Descrição: F
-Tamanho: Tamanho desconhecido
-Quantidade em estoque: 6
+Sabor: Brocolis
+Valor: 55.00
+Descrição: ksks
+Tamanho: P
+Quantidade em estoque: 8
+
+Lista de pizzas:
+Sabor: Chocolate
+Valor: 85.00
+Descrição: kssk
+Tamanho: F
+Quantidade em estoque: 8
+
+Lista de pizzas:
+Sabor: haveia
+Valor: 88.00
+Descrição: ksks
+Tamanho: F
+Quantidade em estoque: 9
 
 

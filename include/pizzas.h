@@ -3,7 +3,7 @@ struct pizza{
     char flavor[50];
     char description[500];
     float price;
-    int size;
+    char size[5];
     int qtdInStock;
     int qtdInStocktotal;
 };
@@ -12,7 +12,6 @@ typedef struct pizza Pizza;
 typedef struct node Node;
 
 Node *addPizza(Node *list, FILE *file);
-int listNull(Node *list);
 void printList(Node *list);
 Node *removePizza(Node *list, FILE *file);
 void editPizza(Node *list, FILE *file);
