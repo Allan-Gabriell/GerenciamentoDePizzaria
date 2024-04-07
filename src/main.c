@@ -113,6 +113,7 @@ int main(void){
     pizzas = fopen("pizzas.txt", "a");
     menu(&pizzaList, pizzas);
 
+    printTxt(pizzaList, pizzas);
 
     fclose(pizzas);
     return 0;

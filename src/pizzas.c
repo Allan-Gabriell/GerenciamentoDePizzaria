@@ -63,7 +63,6 @@ Node *addPizza(Node *list, FILE *file){
     }while(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "SIM") == 0);
 
     fflush(stdout);
-    printTxt(list, file);
     return list;
 }
 
