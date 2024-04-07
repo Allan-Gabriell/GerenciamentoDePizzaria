@@ -1,58 +1,116 @@
 #include "../include/pedido.h"
-#include "../include/pizzas.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-struct order{
-    char client_name[100];    // Identificação
-    float qntOrder;           // Total de Pedido
-    Pizza *list;              // Lista de Pizzas Pedidas
-    struct order *next;
+struct queueNode {
+    Order data;
+    struct queueNode *next;
 };
 
-struct orderpizza{  
-    Order *start;
-    Order *end;
+struct queue {
+    struct queueNode *front;
+    struct queueNode *rear;
 };
 
-OrderPizza* create_order(void){
-    OrderPizza*queue = (OrderPizza*) malloc (sizeof(OrderPizza));
-    queue->start = NULL;
-    queue->end = NULL;
+Queue* createQueue() {
+    Queue* queue = (Queue*)malloc(sizeof(Queue));
+    if (queue == NULL) {
+        fprintf(stderr, "Erro ao alocar memória para a fila\n");
+        exit(1);
+    }
+    queue->front = NULL;
+    queue->rear = NULL;
     return queue;
 }
 
-void new_pizzaorder (OrderPizza *queue, Node *pizzaList){
-    Order *neworder = (Order*) malloc (sizeof(Order));
-    int pizzaqnt;
-
-    printf("Informe seu nome: ");
-    scanf(" %[^\n]", neworder ->client_name );
-    printf("Informe a quantidade de pizzas que deseja pedir: ");
-    scanf("%d", &pizzaqnt);
-
-    // Imprima a lista de pizzas
-    printList(pizzaList);
+void enqueue(Queue* queue, Order order) {
+    QueueNode* newNode = (QueueNode*)malloc(sizeof(QueueNode));
+    if (newNode == NULL) {
+        fprintf(stderr, "Erro ao alocar memória para o novo nó\n");
+        exit(1);
+    }
+    newNode->data = order;
+    newNode->next = NULL;
     
-    /*
-    neworder->next = NULL;
-    if (queue->end!=NULL) {
-        queue->end->next = neworder;
+    if (isEmpty(queue)) {
+        queue->front = newNode;
     } else {
-        queue->start = neworder;;
+        queue->rear->next = newNode;
     }
-    queue->end = neworder;
-    */
+    queue->rear = newNode;
 }
 
-int empty_pizzaorder (OrderPizza *queue){
-    return (queue->start==NULL);
-}
-void print_pizzaorder (OrderPizza *queue){
-    Order *aux;
-    for (aux=queue->start; aux!=NULL; aux=aux->next){
-        /*
-        imprimir ordem
-        */
+Order dequeue(Queue* queue) {
+    if (isEmpty(queue)) {
+        fprintf(stderr, "Fila vazia, não é possível remover\n");
+        exit(1);
     }
+    QueueNode* temp = queue->front;
+    Order data = temp->data;
+    queue->front = queue->front->next;
+    free(temp);
+    if (queue->front == NULL) {
+        queue->rear = NULL;
+    }
+    return data;
+}
+
+int isEmpty(Queue* queue) {
+    return queue->front == NULL;
+}
+
+struct pizzaOrderNode {
+    Node *pizzaNode;
+    struct pizzaOrderNode *next;
+};
+
+struct pizzaOrderList {
+    struct pizzaOrderNode *head;
+};
+
+PizzaOrderList* createPizzaOrderList() {
+    PizzaOrderList *list = (PizzaOrderList*)malloc(sizeof(PizzaOrderList));
+    if (list == NULL) {
+        fprintf(stderr, "Erro ao alocar memória para a lista de pizzas pedidas\n");
+        exit(1);
+    }
+    list->head = NULL;
+    return list;
+}
+
+void addToPizzaOrderList(PizzaOrderList *list, Node *pizzaNode) {
+    PizzaOrderNode *newNode = (PizzaOrderNode*)malloc(sizeof(PizzaOrderNode));
+    if (newNode == NULL) {
+        fprintf(stderr, "Erro ao alocar memória para o novo nó da lista de pizzas pedidas\n");
+        exit(1);
+    }
+    newNode->pizzaNode = pizzaNode;
+    newNode->next = NULL;
+
+    if (list->head == NULL) {
+        list->head = newNode;
+    } else {
+        PizzaOrderNode *current = list->head;
+        while (current->next != NULL) {
+            current = current->next;
+        }
+        current->next = newNode;
+    }
+}
+
+
+void Enqueue(Queue* queue, Node *pizzaList) {
+    Order order;
+    char pizzaName[100];
+
+    printf("Digite o nome do cliente: ");
+    scanf(" %[^\n]", order.nameClient);
+
+    printf("Escolha a pizza desejada: \n");
+    printList(pizzaList);
+
+    printf("Digite o nome da pizza desejada: ");
+    scanf(" %[^\n]", pizzaName);
+
 }

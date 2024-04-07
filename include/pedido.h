@@ -1,8 +1,17 @@
-
+#include "../include/pizzas.h"
+struct order {
+    char nameClient[100];
+    float qtdOrder;
+    Node *pizza;
+};
+typedef struct pizzaOrderNode PizzaOrderNode;
+typedef struct pizzaOrderList PizzaOrderList;
 typedef struct order Order;
-typedef struct orderpizza OrderPizza;
+typedef struct queueNode QueueNode;
+typedef struct queue Queue;
 
-OrderPizza* create_order(void);
-void new_pizzaorder (OrderPizza *queue);
-int empty_pizzaorder (OrderPizza *queue);
-void print_pizzaorder (OrderPizza *queue);
+Queue* createQueue();
+void enqueue(Queue* queue, Order order);
+Order dequeue(Queue* queue);
+int isEmpty(Queue* queue);
+void Enqueue(Queue* queue, Node *pizzaList);

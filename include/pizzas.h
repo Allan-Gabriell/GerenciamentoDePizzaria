@@ -1,3 +1,6 @@
+#ifndef PIZZAS_H_INCLUDED
+#define PIZZAS_H_INCLUDED
+
 #include <stdio.h>
 struct pizza{
     char flavor[50];
@@ -21,3 +24,4 @@ void printTxt(Node *list, FILE *file);
 Node *loadPizzas(FILE *file);
 void clearFileContents(const char *filename);
 void printListPizzas(Node *list);
+#endif // PIZZAS_H_INCLUDED

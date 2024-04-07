@@ -1,5 +1,4 @@
 #include "../include/pedido.h"
-#include "../include/pizzas.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -11,7 +10,7 @@ void menu(Node **head, FILE *pizzas){
     int num;
     char decision[3];
 
-    OrderPizza *orderPizza = create_order();
+    Queue *orderPizza = createQueue();
 
     do{
         printf("===== Bem vindo ao nosso sistema de pizzaria =====\n");
@@ -60,7 +59,7 @@ void menu(Node **head, FILE *pizzas){
                     printf("Deseja adicionar um novo pedido? (s/n) \n");
                     scanf(" %[^\n]", decision);
                     if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
-                        new_pizzaorder(orderPizza, *head);
+                      Enqueue(orderPizza, *head);
                     } else {
                         menu(head, pizzas);
                     }
