@@ -5,54 +5,49 @@
 
 struct order{
     char client_name[100];    // Identificação
-    int qntOrder;             // Total de Pedido
+    float qntOrder;           // Total de Pedido
     Pizza *list;              // Lista de Pizzas Pedidas
+    struct order *next;
 };
-// Fila de Pizzas
+
 struct orderpizza{  
-    Order orders;
-    struct orderpizza *next;
+    Order *start;
+    Order *end;
 };
-//Criar fila vazia
-OrderPizza *create_order(){  
-    return NULL;
-}
-// Fila Vazia
-int empty_queue(OrderPizza *queue){
-    return (queue == NULL);
-}
-//Adicionar novo pedido
-OrderPizza *add_order(OrderPizza *queue, Order neworder){ 
-    OrderPizza *new = (OrderPizza *) malloc (sizeof(OrderPizza));
-    new->orders = neworder;
-    new->next = NULL;
-    if (empty_queue(queue)){
-        return new;
-    }
-    OrderPizza *aux = queue;
-    while (aux->next != NULL){
-        aux = aux->next;
-    }
-    aux->next = new;
+
+OrderPizza* create_order(void){
+    OrderPizza*queue = (OrderPizza*) malloc (sizeof(OrderPizza));
+    queue->start = NULL;
+    queue->end = NULL;
     return queue;
-}
-//Remover pedido
-OrderPizza *remove_order(OrderPizza *queue){ 
-    if (empty_queue(queue)){
-        printf("Pedidos Vazios.\n");
-        return NULL;
-    }
-    OrderPizza *aux = queue;
-    queue = queue->next;
-    free(queue);
-    return queue;
-}
-//Imprimir Pedido
-void print_order (OrderPizza *queue){ 
-    OrderPizza *aux = queue;
-    while (aux !=NULL){
-        printf("%s");
-        aux = aux->next;
-    }
 }
 
+void new_pizzaorder (OrderPizza *queue){
+    Order *neworder = (Order*) malloc (sizeof(Order));
+    int pizzaqnt;
+    printf("Informe seu nome: ");
+    scanf(" %[^\n]", neworder->client_name );
+    printf("Informe a quantidade de pizzas que deseja pedir: ");
+    scanf("%d",pizzaqnt);
+    /*
+    neworder->next = NULL;
+    if (queue->end!=NULL) {
+        queue->end->next = neworder;
+    } else {
+        queue->start = neworder;;
+    }
+    queue->end = neworder;
+    */
+} 
+
+int empty_pizzaorder (OrderPizza *queue){
+    return (queue->start==NULL);
+}
+void print_pizzaorder (OrderPizza *queue){
+    Order *aux;
+    for (aux=queue->start; aux!=NULL; aux=aux->next){
+        /*
+        imprimir ordem
+        */
+    }
+}
