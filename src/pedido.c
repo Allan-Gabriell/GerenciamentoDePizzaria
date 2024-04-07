@@ -22,13 +22,18 @@ OrderPizza* create_order(void){
     return queue;
 }
 
-void new_pizzaorder (OrderPizza *queue){
+void new_pizzaorder (OrderPizza *queue, Node *pizzaList){
     Order *neworder = (Order*) malloc (sizeof(Order));
     int pizzaqnt;
+
     printf("Informe seu nome: ");
-    scanf(" %[^\n]", neworder->client_name );
+    scanf(" %[^\n]", neworder ->client_name );
     printf("Informe a quantidade de pizzas que deseja pedir: ");
-    scanf("%d",pizzaqnt);
+    scanf("%d", &pizzaqnt);
+
+    // Imprima a lista de pizzas
+    printList(pizzaList);
+    
     /*
     neworder->next = NULL;
     if (queue->end!=NULL) {
@@ -38,7 +43,7 @@ void new_pizzaorder (OrderPizza *queue){
     }
     queue->end = neworder;
     */
-} 
+}
 
 int empty_pizzaorder (OrderPizza *queue){
     return (queue->start==NULL);

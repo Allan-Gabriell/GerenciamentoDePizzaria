@@ -11,6 +11,8 @@ void menu(Node **head, FILE *pizzas){
     int num;
     char decision[3];
 
+    OrderPizza *orderPizza = create_order();
+
     do{
         printf("===== Bem vindo ao nosso sistema de pizzaria =====\n");
         printf("Por favor informe um número de acordo com a opção!\n");
@@ -55,7 +57,13 @@ void menu(Node **head, FILE *pizzas){
                     }
                 break;
                 case 3:
-                
+                    printf("Deseja adicionar um novo pedido? (s/n) \n");
+                    scanf(" %[^\n]", decision);
+                    if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
+                        new_pizzaorder(orderPizza, *head);
+                    } else {
+                        menu(head, pizzas);
+                    }
                 break;
                 case 4:
                 break;
