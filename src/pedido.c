@@ -131,14 +131,18 @@ void Enqueue(Queue *queue, Node *pizzaList){
     printf("Digite a quantidade de pizzas desejadas: ");
     scanf("%d", &qntPizza);
 
-    if (qntPizza <= 0)
-    {
+    if (qntPizza <= 0){
         printf("Quantidade inválida de pizzas, não é possível concluir o pedido.\n");
         return;
     }
+    
+    FILE *file = fopen("pedidos.txt", "a");  // Abre o arquivo para adicionar novos pedidos
+    if (file == NULL) {
+        printf("Erro ao abrir o arquivo de pedidos.\n");
+        return;
+    }
 
-    while (qntPizza > 0)
-    {
+    while (qntPizza > 0){
         printf("Pizzas disponíveis: \n");
         printList(pizzaList);
 
@@ -157,6 +161,11 @@ void Enqueue(Queue *queue, Node *pizzaList){
                     enqueue(queue, order);  // Adiciona o pedido na fila
                     aux->pizza.qtdInStock--;  
                     printf("Pedido de %s (%s) adicionado com sucesso!\n", pizzaName, pizzaSize);
+
+                    fprintf(file, "Cliente: %s\n", order.nameClient);
+                    fprintf(file, "Pedido: %s (%s)\n", order.pizza->pizza.flavor, order.pizza->pizza.size,order.pizza->pizza.price);
+                    fprintf(file, "Preço: %.2f\n", order.pizza->pizza.price);
+                    fprintf(file, "\n");
                     qntPizza--;  
                     break;
                 } else {
@@ -171,6 +180,7 @@ void Enqueue(Queue *queue, Node *pizzaList){
             return;
         }
     }
+    fclose(file);
 }
 
 void noordered_printQueue(Queue *queue) {
