@@ -109,19 +109,6 @@ void printListPizzas(Node *list) {
         printf("Lista vazia!\n");
         return;
     }
-
-    printf("\nLista de pizzas:\n");
-    Node *aux = list;
-    while(aux != NULL){
-        printf("Sabor: %s\n", aux->pizza.flavor);
-        if(aux->pizza.qtdInStock == 0) {
-            printf("Não há estoque para este sabor.\n");
-        } else {
-            printf("Quantidade em estoque: %d\n", aux->pizza.qtdInStock);
-        }
-        printf("\n");
-        aux = aux->next;
-    }
 }
 
 Node *removePizza(Node *list) {
