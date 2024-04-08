@@ -1,13 +1,13 @@
 Lista de pizzas:
-Sabor: Quatro Queijos
+Sabor: Azeitona
 Valor: 55.00
-Descrição: kskks
+Descrição: skksksskks
+Tamanho: M
+Quantidade em estoque: 9
+
+Sabor: peperone
+Valor: 99.00
+Descrição: ksks
 Tamanho: G
 Quantidade em estoque: 8
-
-Sabor: Queijo
-Valor: 55.00
-Descrição: ksskskskssksks
-Tamanho: F
-Quantidade em estoque: 10
 

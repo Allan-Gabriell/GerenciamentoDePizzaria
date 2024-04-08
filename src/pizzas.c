@@ -1,5 +1,6 @@
 #include "../include/pedido.h"
 #include "../include/pizzas.h"
+#include "../include/funcoes.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -18,14 +19,33 @@ Node *addPizza(Node *list) {
     do {
         Pizza newPizza;
 
+        do {
         printf("Informe o sabor da pizza: ");
         scanf(" %[^\n]", newPizza.flavor);
+            if (!containsOnlyLetters(newPizza.flavor)) {
+                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+            }
+        } while (!containsOnlyLetters(newPizza.flavor));
+
         printf("Informe o valor da pizza: ");
         scanf("%f", &newPizza.price);
-        printf("Informe o tamanho da pizza: (P, M, G, F): ");
-        scanf(" %[^\n]", newPizza.size);
-        printf("Informe uma descrição da pizza: \n");
-        scanf(" %[^\n]", newPizza.description);
+
+        do {
+            printf("Informe o tamanho da pizza: (P, M, G, F): ");
+            scanf(" %[^\n]", newPizza.size);
+            if(!containsOnlyLetters(newPizza.size)){
+                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+            }
+        }while(!containsOnlyLetters(newPizza.size));
+        
+        do{
+            printf("Informe uma descrição da pizza: \n");
+            scanf(" %[^\n]", newPizza.description);
+            if(!containsOnlyLetters(newPizza.description)){
+                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+            }
+        }while(!containsOnlyLetters(newPizza.description));
+        
         printf("Informe a quantidade em estoque: ");
         scanf("%d", &newPizza.qtdInStock);
 
