@@ -1,8 +1,13 @@
 Lista de pizzas:
-Sabor: Doce de Leite
-Valor: 30,40
-Descrição: Uma pizza de Doce de leite
-Tamanho: P
-Quantidade em estoque: 0
+Sabor: Quatro Queijos
+Valor: 55.00
+Descrição: kskks
+Tamanho: G
+Quantidade em estoque: 8
 
+Sabor: Queijo
+Valor: 55.00
+Descrição: ksskskskssksks
+Tamanho: F
+Quantidade em estoque: 10
 

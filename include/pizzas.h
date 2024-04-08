@@ -14,14 +14,13 @@ struct pizza{
 typedef struct pizza Pizza;
 typedef struct node Node;
 
-Node *addPizza(Node *list, FILE *file);
+Node *addPizza(Node *list);
 void printList(Node *list);
-Node *removePizza(Node *list, FILE *file);
-void editPizza(Node *list, FILE *file);
+Node *removePizza(Node *list);
+void editPizza(Node *list);
 void searchPizzaByName(Node *list);
-void printTxt(Node *list, FILE *file);
+void printTxt(Node *list);
 
-Node *loadPizzas(FILE *file);
-void clearFileContents(const char *filename);
+
 void printListPizzas(Node *list);
 #endif // PIZZAS_H_INCLUDED
