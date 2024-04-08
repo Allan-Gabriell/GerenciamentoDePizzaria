@@ -15,3 +15,4 @@ void enqueue(Queue* queue, Order order);
 Order dequeue(Queue* queue);
 int isEmpty(Queue* queue);
 void Enqueue(Queue* queue, Node *pizzaList);
+Order dequeueorder(Queue *queue);

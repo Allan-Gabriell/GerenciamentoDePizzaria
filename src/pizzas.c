@@ -10,12 +10,8 @@ struct node{
 };
 
 Node *addPizza(Node *list) {
-    FILE *file = fopen("pizzas.txt", "a");
-    if (file == NULL) {
-        printf("Erro ao abrir o arquivo pizzas.txt\n");
-        return list;
-    }
     char decision[3];
+    printList(list);
     do {
         Pizza newPizza;
 
@@ -80,7 +76,6 @@ Node *addPizza(Node *list) {
 
     fflush(stdout);
     printTxt(list);
-    fclose(file);
     return list;
 }
 
@@ -97,7 +92,6 @@ void printList(Node *list) {
         printf("Valor: %.2f\n", aux->pizza.price);
         printf("Tamanho: %s\n", aux->pizza.size);
         printf("Descrição: %s\n", aux->pizza.description);
-        printf("Tamanho da pizza: %s\n", aux->pizza.size);
         printf("Quantidade em estoque: %d\n", aux->pizza.qtdInStock);
         printf("\n");
         aux = aux->next;
@@ -248,7 +242,6 @@ void printTxt(Node *list) {
         fclose(file);
         return;
     } else {
-        fprintf(file, "Lista de pizzas:\n");
         while(newList != NULL){
             fprintf(file, "Sabor: %s\n", newList->pizza.flavor);
             fprintf(file, "Valor: %.2f\n", newList->pizza.price);
@@ -273,7 +266,7 @@ Node *loadPizzas() {
     Node *list = NULL;
     Pizza newPizza;
 
-    while(fscanf(file, "Lista de pizzas:\nSabor: %[^\n]\nValor: %f\nDescrição: %[^\n]\nTamanho: %[^\n]\nQuantidade em estoque: %d\n\n", newPizza.flavor, &newPizza.price, newPizza.description, newPizza.size, &newPizza.qtdInStock) == 5) {
+    while(fscanf(file, "Sabor: %[^\n]\nValor: %f\nDescrição: %[^\n]\nTamanho: %[^\n]\nQuantidade em estoque: %d\n\n", newPizza.flavor, &newPizza.price, newPizza.description, newPizza.size, &newPizza.qtdInStock) == 5) {
         Node *newNode = (Node *) malloc(sizeof(Node));
         if(newNode == NULL){
             printf("Erro ao alocar memoria");
@@ -282,9 +275,10 @@ Node *loadPizzas() {
         }
         newNode->pizza = newPizza;
 
+        // Insere o novo nó na lista mantendo a ordem alfabética
         if(list == NULL || strcmp(newPizza.flavor, list->pizza.flavor) < 0){
             newNode->next = list;
-            list = newNode;
+            list = newNode; // Atualiza o ponteiro list para apontar para o primeiro nó da lista
         } else {
             Node *current = list;
             while(current->next != NULL && strcmp(newPizza.flavor, current->next->pizza.flavor) > 0){

@@ -32,5 +32,5 @@ void searchPizzaByName(Node *list);
 void printTxt(Node *list);
 //Minha função que verifica se minha lista está vazia
 void printListPizzas(Node *list);
-
+Node *loadPizzas();
 #endif // PIZZAS_H_INCLUDED

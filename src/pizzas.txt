@@ -1,13 +1,11 @@
-Lista de pizzas:
 Sabor: Azeitona
-Valor: 55.00
-Descrição: skksksskks
-Tamanho: M
-Quantidade em estoque: 9
-
-Sabor: peperone
-Valor: 99.00
-Descrição: ksks
+Valor: 90.00
+Descrição: kkksks
 Tamanho: G
-Quantidade em estoque: 8
+Quantidade em estoque: 2
 
+Sabor: Peperone
+Valor: 56.00
+Descrição: ksks
+Tamanho: M
+Quantidade em estoque: 5
