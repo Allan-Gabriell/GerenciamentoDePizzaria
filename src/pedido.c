@@ -172,3 +172,65 @@ void Enqueue(Queue *queue, Node *pizzaList){
         }
     }
 }
+
+void noordered_printQueue(Queue *queue) {
+    QueueNode *current = queue->front;
+
+    if (current == NULL) {
+        printf("A fila está vazia.\n");
+        return;
+    }
+
+    printf("Fila de Pedidos:\n");
+    while (current != NULL) {
+        printf("Cliente: %s\n", current->data.nameClient);
+        printf("Pedido: %s (%s)\n", current->data.pizza->pizza.flavor, current->data.pizza->pizza.size);
+        printf("\n");
+        current = current->next;
+    }
+}
+
+void ordedprintQueue(Queue *queue) {
+    QueueNode *current = queue->front;
+    char lastClientName[100] = "";  // Para armazenar o nome do cliente anterior
+    int sameClient = 0;  // Flag para indicar se o cliente é o mesmo do pedido anterior
+
+    if (current == NULL) {
+        printf("A fila está vazia.\n");
+        return;
+    }
+
+    printf("Fila de Pedidos:\n");
+    while (current != NULL) {
+        if (strcmp(current->data.nameClient, lastClientName) != 0) {
+            strcpy(lastClientName, current->data.nameClient);
+            sameClient = 0;
+        }
+        if (sameClient == 0) {
+            printf("Cliente: %s\n", current->data.nameClient);
+            sameClient = 1;
+        }
+        printf("Pedido: %s (%s)\n", current->data.pizza->pizza.flavor, current->data.pizza->pizza.size);
+        current = current->next;
+    }
+}
+
+Order dequeueorder(Queue *queue){
+    if(isEmpty(queue)){
+        printf("A fila de pedidos está vazia!\n");
+        Order emptyOrder;  // Cria uma ordem vazia para retornar
+        strcpy(emptyOrder.nameClient, "");  // Inicializa o nome do cliente como vazio
+        emptyOrder.qtdOrder = 0;  // Inicializa a quantidade de pedidos como zero
+        emptyOrder.pizza = NULL;  // Inicializa a pizza como NULL
+        return emptyOrder;
+    }
+
+    QueueNode *temp = queue->front;
+    Order data = temp->data;
+    queue->front = queue->front->next;
+    free(temp);
+    if(queue->front == NULL){
+        queue->rear = NULL;
+    }
+    return data;
+}
