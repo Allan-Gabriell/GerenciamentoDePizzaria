@@ -1,3 +1,4 @@
+#include "../include/pedido.h"
 #include "../include/pizzas.h"
 #include <stdlib.h>
 #include <stdio.h>
