@@ -3,8 +3,8 @@ Alho
 Alho Molho Massa Cebolas E Tomates
 P
 10
-Peperone
-55.00
+Azeitona
+66.00
 Ksks
 M
 8
@@ -12,4 +12,9 @@ Peperone
 55.00
 Ksks
 F
+8
+Peperone
+55.00
+Ksks
+M
 8
