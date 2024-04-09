@@ -1,10 +1,11 @@
-Cliente: Leonardo
-Sabor: Alho
-Tamanho: P
-Sabor: S
-Tamanho: P
+Allan
+1
+Alho P
+Preço total: 56.00
 
-Cliente: Allan
-Sabor: S
-Tamanho: P
+Leonardo
+2
+Alho P
+Alho P
+Preço total: 112.00
 

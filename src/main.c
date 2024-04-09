@@ -56,7 +56,7 @@ void menu()
                 scanf(" %[^\n]", decision);
                 if (strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0)
                 {
-                    head = removePizza();
+                    dequeue(orderPizza);
                 }
                 else
                 {

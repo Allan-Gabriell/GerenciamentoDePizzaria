@@ -1,61 +1,11 @@
-Sabor: Alho
-Valor: 56.00
-Descrição: ksksk
-Tamanho: P
-Quantidade em estoque: 5
-
-Sabor: Alho
-Valor: 69.00
-Descrição: ksks
-Tamanho: G
-Quantidade em estoque: 5
-
-Sabor: Alho
-Valor: 78.00
-Descrição: ksks
-Tamanho: M
-Quantidade em estoque: 6
-
-Sabor: Azeitona
-Valor: 40.00
-Descrição: Não gosto
-Tamanho: M
-Quantidade em estoque: 14
-
-Sabor: Chocolate
-Valor: 70.00
-Descrição: ksks
-Tamanho: P
-Quantidade em estoque: 10
-
-Sabor: Frango
-Valor: 75.00
-Descrição: kkskssk
-Tamanho: a
-Quantidade em estoque: 85
-
-Sabor: Frango Com Catupiry
-Valor: 55.00
-Descrição: Ksksks
-Tamanho: F
-Quantidade em estoque: 90
-
-Sabor: Marshmellow
-Valor: 44.00
-Descrição: Ooo
-Tamanho: G
-Quantidade em estoque: 2
-
-Sabor: Peperone
-Valor: 56.00
-Descrição: Ksks
-Tamanho: G
-Quantidade em estoque: 8
-
-Sabor: S
-Valor: 90.00
-Descrição: Ksksk
-Tamanho: P
-Quantidade em estoque: 2
-
+Alho
+56.00
+Alho Molho Massa Cebolas E Tomates
+P
+10
+Peperone
+55.00
+Ksks
+F
+8
 Fim arquivo

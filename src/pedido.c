@@ -2,7 +2,8 @@
 
 struct order {
     char nameClient[100];
-    float qtdOrder;
+    float price; // Adicionando o campo price para armazenar o preço total do pedido
+    int qtdPizzas;
     Node *pizza;
 };
 
@@ -29,8 +30,8 @@ Queue *createQueue(){
 }
 
 void enqueue(Queue *queue){ // Inserir
+    Queue *listOrder = loadOrder();
     Node *listPizzas = loadPizzas();
-    int qtdPizzasOrder;
     char flavor[40];
     char tamanho[5];
     Node *pizza;
@@ -45,10 +46,11 @@ void enqueue(Queue *queue){ // Inserir
     printf("Informe o nome do cliente: ");
     scanf(" %[^\n]", newNode->data.nameClient);
     printf("Quantas pizzas deseja pedir: ");
-    scanf("%d", &qtdPizzasOrder);
+    scanf("%d", &newNode->data.qtdPizzas);
 
     newNode->data.pizza = NULL;
-    for (i = 0; i < qtdPizzasOrder; i++)
+    newNode->data.price = 0; // Inicializando o preço total como zero
+    for (i = 0; i < newNode->data.qtdPizzas; i++)
     {
         printf("Informe o sabor da pizza %d: ", i + 1);
         scanf(" %[^\n]", flavor);
@@ -63,6 +65,9 @@ void enqueue(Queue *queue){ // Inserir
         {
             newNode->data.pizza = orderListPizza(newNode->data.pizza,pizza->pizza);
             pizza->pizza.qtdInStock--;
+
+            // Atualiza o preço total do pedido
+            newNode->data.price += pizza->pizza.price;
         }
         
     }
@@ -95,12 +100,34 @@ Node *orderListPizza(Node * list, Pizza new){
     return newNodeOrder;
 }
 
+void dequeue(Queue *queue) {
+    if (queue->front == NULL) {
+        printf("Fila vazia, não é possível remover.\n");
+        return;
+    }
+
+    QueueNode *temp = queue->front;
+    queue->front = queue->front->next;
+
+    if (queue->front == NULL) {
+        queue->rear = NULL;
+    }
+
+    free(temp);
+
+    printQueue(queue);
+    printOrdertxt(queue);
+
+    printf("Primeiro pedido removido com sucesso!\n");
+}
+
 Node* searchPizzaOrderByFlavor(Node* head, char* flavor) {
     Node* current = head;
     while (current != NULL) {
         if (strcmp(current->pizza.flavor, flavor) == 0) {
             return current;
         }
+        printf("Sabor: %s %s\n", current->pizza.flavor, flavor);
         current = current->next;
     }
     return NULL;
@@ -131,16 +158,77 @@ void printOrdertxt(Queue *queue){
     QueueNode *current = queue->front;
     Node *aux;
     while (current != NULL) {
-        fprintf(Ordertxt, "Cliente: %s\n", current->data.nameClient);
+        fprintf(Ordertxt, "%s\n", current->data.nameClient);
+        fprintf(Ordertxt, "%d\n", current->data.qtdPizzas);
         aux = current->data.pizza;
         while (aux != NULL) {
-            fprintf(Ordertxt, "Sabor: %s\n", aux->pizza.flavor);
-            fprintf(Ordertxt, "Tamanho: %s\n", aux->pizza.size);
+            fprintf(Ordertxt, "%s %s\n", aux->pizza.flavor, aux->pizza.size); // Adiciona um espaço entre o sabor e o tamanho
             aux = aux->next;
         }
+        // Escreve o preço total do pedido no arquivo
+        fprintf(Ordertxt, "Preço total: %.2f\n", current->data.price);
         current = current->next;
         fprintf(Ordertxt, "\n");
     }
     
     fclose(Ordertxt);
+}
+
+
+Queue *loadOrder(){
+    FILE *Ordertxt = fopen("pizzaria.txt", "r");
+    if(Ordertxt == NULL){
+        printf("Erro ao abrir o arquivo! \n");
+        return NULL;
+    } 
+
+    Queue *queue = createQueue();
+    QueueNode *rear = NULL;
+
+    while (1) {
+        QueueNode *newQueueNode = (QueueNode *) malloc(sizeof(QueueNode));
+        if (newQueueNode == NULL) {
+            printf("Erro ao alocar memória! \n");
+            exit(1);
+        }
+
+        if (fscanf(Ordertxt, "%s", newQueueNode->data.nameClient) != 1) {
+            free(newQueueNode);
+            break; // Se falhar a leitura do nome do cliente, sai do loop
+        }
+
+        fscanf(Ordertxt, "%d", &newQueueNode->data.qtdPizzas); 
+        newQueueNode->data.pizza = NULL;
+
+        for(int i = 0; i < newQueueNode->data.qtdPizzas; i++) {
+            Node *newNode = (Node *) malloc(sizeof(Node));
+            if (newNode == NULL) {
+                printf("Erro ao alocar memória! \n");
+                exit(1);
+            }
+
+            char flavor[40], size[5];
+            fscanf(Ordertxt, "%s %s", flavor, size);
+            strcpy(newNode->pizza.flavor, flavor);
+            strcpy(newNode->pizza.size, size);
+
+            newNode->next = newQueueNode->data.pizza;
+            newQueueNode->data.pizza = newNode;
+        }
+
+        // Lê e ignora a linha que contém o preço total do pedido
+        char temp[100];
+        fscanf(Ordertxt, "%[^\n]", temp);
+
+        newQueueNode->next = NULL;
+        if (queue->front == NULL) {
+            queue->front = newQueueNode;
+        } else {
+            rear->next = newQueueNode;
+        }
+        rear = newQueueNode;
+    }
+
+    fclose(Ordertxt);
+    return queue;
 }

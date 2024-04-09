@@ -193,6 +193,7 @@ Node *removePizza() {
 void editPizza() {
     Node *list = loadPizzas();
     char decision[3];
+    char size[50];
     int newQtdInStock;
     do {
         printList(list);
@@ -205,16 +206,19 @@ void editPizza() {
                 printf("\nSó pode conter letras e espaços! Informe novamente.\n");
             }
         }while(!containsOnlyLetters(flavor));
+        printf("Informe o tamanho da pizza a ser editada (P, M, G, F): ");
+        scanf(" %[^\n]", size);
 
         Node *aux = list;
         while(aux != NULL){
-            if(strcmp(aux->pizza.flavor, flavor) == 0){
+            if(strcmp(aux->pizza.flavor, flavor) == 0 && strcmp(aux->pizza.size, size) == 0){
                 printf("Informe o novo valor: ");
                 scanf("%f", &aux->pizza.price);
                 
                 do{
                     printf("Informe a nova descrição: ");
                     scanf(" %[^\n]", aux->pizza.description);
+                    capitalizeFirstLetter(aux->pizza.description);
                     if(!containsOnlyLetters(aux->pizza.description)){
                         printf("\nSó pode conter letras e espaços! Informe novamente.\n");
                     }
@@ -223,6 +227,7 @@ void editPizza() {
                 do{
                     printf("Informe o novo tamanho da pizza (P, M, G, F): ");
                     scanf(" %[^\n]", aux->pizza.size);
+                    capitalizeFirstLetter(aux->pizza.size);
                     if(!containsOnlyLetters(aux->pizza.size)){
                         printf("\nSó pode conter letras e espaços! Informe novamente.\n");
                     }
@@ -326,12 +331,11 @@ void printTxt(Node *list) {
         return;
     } else {
         while(newList != NULL){
-            fprintf(file, "Sabor: %s\n", newList->pizza.flavor);
-            fprintf(file, "Valor: %.2f\n", newList->pizza.price);
-            fprintf(file, "Descrição: %s\n", newList->pizza.description);
-            fprintf(file, "Tamanho: %s\n", newList->pizza.size);
-            fprintf(file, "Quantidade em estoque: %d\n", newList->pizza.qtdInStock);
-            fprintf(file, "\n");
+            fprintf(file, "%s\n", newList->pizza.flavor);
+            fprintf(file, "%.2f\n", newList->pizza.price);
+            fprintf(file, "%s\n", newList->pizza.description);
+            fprintf(file, "%s\n", newList->pizza.size);
+            fprintf(file, "%d\n", newList->pizza.qtdInStock);
             newList = newList->next;
         }
         fprintf(file, "Fim arquivo\n");
@@ -350,18 +354,13 @@ Node *loadPizzas() {
     Pizza newPizza;
     Node *list = NULL;
 
-    char price[40];
-    char stock[40];
-    char line[15];
-    fscanf(file, "%s", line);
-    while(strstr(line, "Sabor") != NULL){
-        fscanf(file, " %[^\n]\n", newPizza.flavor);
-        fscanf(file, "Valor: %[^\n]\n", price);
-        fscanf(file, "Descrição: %[^\n]\n", newPizza.description);
-        fscanf(file, "Tamanho: %[^\n]\n", newPizza.size);
-        fscanf(file, "Quantidade em estoque: %[^\n]\n\n", stock);
-        newPizza.price = atof(price); //um para %f e outro para %d
-        newPizza.qtdInStock = atoi(stock);
+    while(fscanf(file, " %[^\n]", newPizza.flavor) != EOF){
+        fscanf(file, " %f", &newPizza.price);
+        fscanf(file, " %[^\n]", newPizza.description);
+        fscanf(file, " %[^\n]", newPizza.size);
+        fscanf(file, " %d", &newPizza.qtdInStock);
+        printf("Entrou\n");
+        
 
         Node *newNode = (Node *) malloc(sizeof(Node));
         if(newNode == NULL){
@@ -384,7 +383,7 @@ Node *loadPizzas() {
             current->next = newNode;
         }
 
-        fscanf(file, "%s", line); // Mova esta linha para aqui
+         // Mova esta linha para aquiRemover pedido
     }
     
 

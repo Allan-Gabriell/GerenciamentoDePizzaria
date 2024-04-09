@@ -14,5 +14,7 @@ Node *orderListPizza(Node * list, Pizza new);
 Node* searchPizzaOrderByFlavor(Node* head, char* flavor);
 void printQueue(Queue *queue);
 void printOrdertxt(Queue *queue);
+Queue *loadOrder();
+void dequeue(Queue *queue);
 
 #endif //PEDIDO
