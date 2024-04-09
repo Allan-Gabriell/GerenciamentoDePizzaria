@@ -1,6 +1,6 @@
 #include "../include/pedido.h"
 #include "../include/pizzas.h"
-#include "../include/funcoes.h"
+#include "../include/sistema.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -17,11 +17,12 @@ Node *addPizza() {
         Pizza newPizza;
 
         do {
-        printf("Informe o sabor da pizza: ");
-        scanf(" %[^\n]", newPizza.flavor);
-            if (!containsOnlyLetters(newPizza.flavor)) {
-                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
-            }
+            printf("Informe o sabor da pizza: ");
+            scanf(" %[^\n]", newPizza.flavor);
+            capitalizeFirstLetter(newPizza.flavor);
+                if (!containsOnlyLetters(newPizza.flavor)) {
+                    printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+                }
         } while (!containsOnlyLetters(newPizza.flavor));
 
         printf("Informe o valor da pizza: ");
@@ -30,15 +31,17 @@ Node *addPizza() {
         do {
             printf("Informe o tamanho da pizza: (P, M, G, F): ");
             scanf(" %[^\n]", newPizza.size);
-            if(!containsOnlyLetters(newPizza.size)){
-                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
-            }
+            capitalizeFirstLetter(newPizza.size);
+                if(!containsOnlyLetters(newPizza.size)){
+                    printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+                }
         }while(!containsOnlyLetters(newPizza.size));
         
         do{
             printf("Informe uma descrição da pizza: \n");
             scanf(" %[^\n]", newPizza.description);
-            if(!containsOnlyLetters(newPizza.description)){
+            capitalizeFirstLetter(newPizza.description);
+                if(!containsOnlyLetters(newPizza.description)){
                 printf("\nSó pode conter letras e espaços! Informe novamente.\n");
             }
         }while(!containsOnlyLetters(newPizza.description));
@@ -71,8 +74,13 @@ Node *addPizza() {
         printf("Novo sabor adicionado com sucesso!\n");
         printList(list);
 
-        printf("Deseja adicionar mais sabor? (S/N): ");
-        scanf(" %[^\n]", decision);
+        do{
+            printf("Deseja adicionar mais uma pizza? (S/N): ");
+            scanf(" %[^\n]", decision);
+            if(!containsOnlyLetters(decision)){
+                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+            }
+        }while(!containsOnlyLetters(decision));
 
     } while(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "SIM") == 0);
 
@@ -125,10 +133,23 @@ Node *removePizza() {
         char flavor[50];
         char size[50];
         printList(list);
-        printf("Informe o sabor da pizza a ser removida: ");
-        scanf(" %[^\n]", flavor);
+         do{
+            printf("Informe o sabor da pizza a ser removida: ");
+            scanf(" %[^\n]", flavor);
+            if(!containsOnlyLetters(flavor)){
+                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+            }
+        }while(!containsOnlyLetters(flavor));
+
         printf("Informe o tamanho da pizza a ser removida (P, M, G, F): ");
         scanf(" %[^\n]", size);
+        do{
+            printf("Informe o tamanho da pizza a ser removida (P, M, G, F): ");
+            scanf(" %[^\n]", size);
+            if(!containsOnlyLetters(size)){
+                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+            }
+        }while(!containsOnlyLetters(size));
 
         Node *aux = list;
         Node *prev = NULL;
@@ -151,8 +172,14 @@ Node *removePizza() {
             printf("Sabor não encontrado!\n");
         }
 
-        printf("Deseja remover outro sabor? (s/n) \n");
-        scanf(" %[^\n]", decision);
+        do{
+            printf("Deseja remover mais uma pizza? (S/N): ");
+            scanf(" %[^\n]", decision);
+            if(!containsOnlyLetters(decision)){
+                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+            }
+        }while(!containsOnlyLetters(decision));
+
     } while(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0);
 
     printTxt(list);
@@ -166,18 +193,37 @@ void editPizza() {
     do {
         printList(list);
         char flavor[50];
-        printf("Informe o sabor da pizza a ser editada: ");
-        scanf(" %[^\n]", flavor);
+
+        do{
+            printf("Informe o sabor da pizza a ser editada: ");
+            scanf(" %[^\n]", flavor);
+            if(!containsOnlyLetters(flavor)){
+                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+            }
+        }while(!containsOnlyLetters(flavor));
 
         Node *aux = list;
         while(aux != NULL){
             if(strcmp(aux->pizza.flavor, flavor) == 0){
                 printf("Informe o novo valor: ");
                 scanf("%f", &aux->pizza.price);
-                printf("Informe a nova descrição: ");
-                scanf(" %[^\n]", aux->pizza.description);
-                printf("Informe o novo tamanho da pizza: (P, M, G, F)");
-                scanf(" %[^\n]", aux->pizza.size);
+                
+                do{
+                    printf("Informe a nova descrição: ");
+                    scanf(" %[^\n]", aux->pizza.description);
+                    if(!containsOnlyLetters(aux->pizza.description)){
+                        printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+                    }
+                }while(!containsOnlyLetters(aux->pizza.description));
+
+                do{
+                    printf("Informe o novo tamanho da pizza (P, M, G, F): ");
+                    scanf(" %[^\n]", aux->pizza.size);
+                    if(!containsOnlyLetters(aux->pizza.size)){
+                        printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+                    }
+                }while(!containsOnlyLetters(aux->pizza.size));
+
                 printf("Deseja adicionar mais pizzas ao estoque? (s/n) ");
                 scanf(" %[^\n]", decision);
                 if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
@@ -195,8 +241,14 @@ void editPizza() {
             printf("Sabor não encontrado!\n");
         }
 
-        printf("Deseja editar outro sabor? (s/n) \n");
-        scanf(" %[^\n]", decision);
+        do{
+            printf("Deseja editar mais uma pizza? (S/N): ");
+            scanf(" %[^\n]", decision);
+            if(!containsOnlyLetters(decision)){
+                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+            }
+        }while(!containsOnlyLetters(decision));
+
     } while(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0);
 
     printTxt(list);
@@ -208,10 +260,23 @@ void searchPizzaByName() {
     do {
         char flavor[50];
         char size[50];
-        printf("Informe o sabor da pizza a ser buscada: ");
-        scanf(" %[^\n]", flavor);
-        printf("Informe o tamanho da pizza a ser buscada (P, M, G, F): ");
-        scanf(" %[^\n]", size);
+        
+        do{
+            printf("Informe o sabor da pizza a ser buscada: ");
+            scanf(" %[^\n]", flavor);
+            if(!containsOnlyLetters(flavor)){
+                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+            }
+        }while(!containsOnlyLetters(flavor));
+
+        
+        do{
+            printf("Informe o tamanho da pizza a ser buscada (P, M, G, F): ");
+            scanf(" %[^\n]", size);
+            if(!containsOnlyLetters(size)){
+                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+            }
+        }while(!containsOnlyLetters(size));
 
         Node *aux = list;
         int found = 0;
@@ -231,8 +296,14 @@ void searchPizzaByName() {
             printf("Sabor não encontrado!\n");
         }
 
-        printf("Deseja buscar outra pizza? (s/n) \n");
-        scanf(" %[^\n]", decision);
+        do{
+            printf("Deseja buscar mais uma pizza? (S/N): ");
+            scanf(" %[^\n]", decision);
+            if(!containsOnlyLetters(decision)){
+                printf("\nSó pode conter letras e espaços! Informe novamente.\n");
+            }
+        }while(!containsOnlyLetters(decision));
+
     } while (strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0);
 }
 
