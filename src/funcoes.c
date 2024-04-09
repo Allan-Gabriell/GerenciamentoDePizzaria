@@ -11,14 +11,3 @@ int containsOnlyLetters(char *str){
     }
     return 1;
 }
-
-int containsOnlyNumbers(int number) {
-    while (number != 0) {
-        int digit = number % 10;
-        if (digit < 0 || digit > 9) {
-            return 0; // Não é um dígito válido
-        }
-        number / 10;
-    }
-    return 1; // Contém apenas números
-}
