@@ -6,6 +6,10 @@ P
 Peperone
 55.00
 Ksks
+M
+8
+Peperone
+55.00
+Ksks
 F
 8
-Fim arquivo

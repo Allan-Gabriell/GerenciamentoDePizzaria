@@ -338,7 +338,7 @@ void printTxt(Node *list) {
             fprintf(file, "%d\n", newList->pizza.qtdInStock);
             newList = newList->next;
         }
-        fprintf(file, "Fim arquivo\n");
+
     }
 
     fclose(file);
@@ -359,7 +359,6 @@ Node *loadPizzas() {
         fscanf(file, " %[^\n]", newPizza.description);
         fscanf(file, " %[^\n]", newPizza.size);
         fscanf(file, " %d", &newPizza.qtdInStock);
-        printf("Entrou\n");
         
 
         Node *newNode = (Node *) malloc(sizeof(Node));
@@ -383,7 +382,7 @@ Node *loadPizzas() {
             current->next = newNode;
         }
 
-         // Mova esta linha para aquiRemover pedido
+
     }
     
 
