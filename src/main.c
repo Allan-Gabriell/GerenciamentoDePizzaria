@@ -72,7 +72,6 @@ void menu()
                 }
                 else
                 {
-                    printQueue(orderPizza);
                     menu(head);
                 }
                 break;

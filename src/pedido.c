@@ -44,7 +44,7 @@ void enqueue(Queue *queue){ // Inserir
 
     printf("Informe o nome do cliente: ");
     scanf(" %[^\n]", newNode->data.nameClient);
-    printf("Quantas você desesja pedir: ");
+    printf("Quantas pizzas deseja pedir: ");
     scanf("%d", &qtdPizzasOrder);
 
     newNode->data.pizza = NULL;
@@ -80,6 +80,7 @@ void enqueue(Queue *queue){ // Inserir
     queue->rear = newNode;
 
     printf("Pedido realizado com sucesso!\n");
+    printQueue(queue);
 }
 
 Node *orderListPizza(Node * list, Pizza new){
