@@ -1,16 +1,8 @@
 #ifndef PIZZAS_H_INCLUDED
 #define PIZZAS_H_INCLUDED
 
-#include <stdio.h>
-
+#include "../src/sistema.c"
 //Nossa struct de pizzas contendo os campos de Sabor, Descrição, Preço, Tamanho e Quantidade em Estoque
-struct pizza{
-    char flavor[50];
-    char description[500];
-    float price;
-    char size[5];
-    int qtdInStock;
-};
 
 //Renomeio aqui a minha struct do tipo Pizza
 typedef struct pizza Pizza;

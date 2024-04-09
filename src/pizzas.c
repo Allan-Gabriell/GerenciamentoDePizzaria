@@ -1,9 +1,13 @@
-#include "../include/pedido.h"
 #include "../include/pizzas.h"
-#include "../include/sistema.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
+
+struct pizza{
+    char flavor[50];
+    char description[500];
+    float price;
+    char size[5];
+    int qtdInStock;
+};
+
 struct node{
     Pizza pizza;
     struct node *next;
@@ -51,7 +55,7 @@ Node *addPizza() {
 
         Node *newNode = (Node *) malloc(sizeof(Node));
         if(newNode == NULL){
-            printf("Erro ao alocar memoria");
+            printf("Erro ao alocar memória\n");
             return list;
             exit(1);
         }
@@ -387,3 +391,4 @@ Node *loadPizzas() {
     fclose(file);
     return list;
 }
+

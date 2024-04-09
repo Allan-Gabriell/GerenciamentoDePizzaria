@@ -1,18 +1,17 @@
-#include "../include/pizzas.h"
-struct order {
-    char nameClient[100];
-    float qtdOrder;
-    Node *pizza;
-};
-typedef struct pizzaOrderNode PizzaOrderNode;
-typedef struct pizzaOrderList PizzaOrderList;
+#ifndef PEDIDO_H
+#define PEDIDO_H
+
+#include "../src/pizzas.c"
+
+
 typedef struct order Order;
 typedef struct queueNode QueueNode;
 typedef struct queue Queue;
 
 Queue* createQueue();
-void enqueue(Queue* queue, Order order);
-Order dequeue(Queue* queue);
-int isEmpty(Queue* queue);
-void Enqueue(Queue* queue, Node *pizzaList);
-Order dequeueorder(Queue *queue);
+void enqueue(Queue *queue);
+Node *orderListPizza(Node * list, Pizza new);
+Node* searchPizzaOrderByFlavor(Node* head, char* flavor);
+void printQueue(Queue *queue);
+
+#endif //PEDIDO

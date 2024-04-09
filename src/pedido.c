@@ -1,12 +1,9 @@
 #include "../include/pedido.h"
-#include "../include/pizzas.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 
-struct node{
-    Pizza pizza;
-    struct node *next;
+struct order {
+    char nameClient[100];
+    float qtdOrder;
+    Node *pizza;
 };
 
 struct queueNode{
@@ -31,17 +28,48 @@ Queue *createQueue(){
     return queue;
 }
 
-void enqueue(Queue *queue, Order order){ // Inserir
+void enqueue(Queue *queue){ // Inserir
+    Node *listPizzas = loadPizzas();
+    int qtdPizzasOrder;
+    char flavor[40];
+    char tamanho[5];
+    Node *pizza;
+    int i;
     QueueNode *newNode = (QueueNode *)malloc(sizeof(QueueNode));
     if (newNode == NULL)
     {
         fprintf(stderr, "Erro ao alocar memória para o novo nó\n");
         exit(1);
     }
-    newNode->data = order;
+
+    printf("Informe o nome do cliente: ");
+    scanf(" %[^\n]", newNode->data.nameClient);
+    printf("Quantas você desesja pedir: ");
+    scanf("%d", &qtdPizzasOrder);
+
+    newNode->data.pizza = NULL;
+    for (i = 0; i < qtdPizzasOrder; i++)
+    {
+        printf("Informe o sabor da pizza %d: ", i + 1);
+        scanf(" %[^\n]", flavor);
+        printf("Informe o tamanho da pizza %d: ", i + 1);
+        scanf(" %[^\n]", tamanho);
+        pizza = searchPizzaOrderByFlavor(listPizzas, flavor);
+        if (pizza == NULL) {
+            printf("Sabor não encontrado.\n");
+            return;
+        }
+        if (pizza->pizza.qtdInStock > 0)
+        {
+            newNode->data.pizza = orderListPizza(newNode->data.pizza,pizza->pizza);
+            pizza->pizza.qtdInStock--;
+        }
+        
+    }
+    
     newNode->next = NULL;
 
-    if (isEmpty(queue))
+    if (queue->front == NULL)
     {
         queue->front = newNode;
     }
@@ -50,197 +78,43 @@ void enqueue(Queue *queue, Order order){ // Inserir
         queue->rear->next = newNode;
     }
     queue->rear = newNode;
+
+    printf("Pedido realizado com sucesso!\n");
 }
 
-Order dequeue(Queue *queue){ // Desenfileiramento
-    if (isEmpty(queue))
-    {
-        fprintf(stderr, "Fila vazia, não é possível remover\n");
+Node *orderListPizza(Node * list, Pizza new){
+    Node *newNodeOrder = (Node *) malloc(sizeof(Node));
+    if(newNodeOrder == NULL){
+        printf("Não foi possível alocar memória!\n");
         exit(1);
     }
-    QueueNode *temp = queue->front;
-    Order data = temp->data;
-    queue->front = queue->front->next;
-    free(temp);
-    if (queue->front == NULL)
-    {
-        queue->rear = NULL;
-    }
-    return data;
+    newNodeOrder->pizza = new;
+    newNodeOrder->next = list;
+    return newNodeOrder;
 }
 
-int isEmpty(Queue *queue){ // Fila vazia
-    return queue->front == NULL;
-}
-
-struct pizzaOrderNode{ // Nó de Pedidos de PIzza
-    Node *pizzaNode;
-    struct pizzaOrderNode *next;
-};
-
-struct pizzaOrderList{ // Padrozinação para Cabeça (?)
-    struct pizzaOrderNode *head;
-};
-
-PizzaOrderList *createPizzaOrderList(){ // Lista de Pizzas disponíveis
-    PizzaOrderList *list = (PizzaOrderList *)malloc(sizeof(PizzaOrderList));
-    if (list == NULL)
-    {
-        fprintf(stderr, "Erro ao alocar memória para a lista de pizzas pedidas\n");
-        exit(1);
-    }
-    list->head = NULL;
-    return list;
-}
-
-void addToPizzaOrderList(PizzaOrderList *list, Node *pizzaNode){ // Adição para pedido de pizza
-    PizzaOrderNode *newNode = (PizzaOrderNode *)malloc(sizeof(PizzaOrderNode));
-    if (newNode == NULL)
-    {
-        fprintf(stderr, "Erro ao alocar memória para o novo nó da lista de pizzas pedidas\n");
-        exit(1);
-    }
-    newNode->pizzaNode = pizzaNode;
-    newNode->next = NULL;
-
-    if (list->head == NULL)
-    {
-        list->head = newNode;
-    }
-    else
-    {
-        PizzaOrderNode *current = list->head;
-        while (current->next != NULL)
-        {
-            current = current->next;
+Node* searchPizzaOrderByFlavor(Node* head, char* flavor) {
+    Node* current = head;
+    while (current != NULL) {
+        if (strcmp(current->pizza.flavor, flavor) == 0) {
+            return current;
         }
-        current->next = newNode;
+        current = current->next;
     }
+    return NULL;
 }
 
-void Enqueue(Queue *queue, Node *pizzaList){
-    Order order;
-    char pizzaName[100];
-    char pizzaSize[5];
-    int qntPizza;
-
-    qntPizza = 0;
-    printf("Digite o nome do cliente: ");
-    scanf(" %[^\n]", order.nameClient);
-
-    printf("Digite a quantidade de pizzas desejadas: ");
-    scanf("%d", &qntPizza);
-
-    if (qntPizza <= 0){
-        printf("Quantidade inválida de pizzas, não é possível concluir o pedido.\n");
-        return;
-    }
-    
-    FILE *file = fopen("pedidos.txt", "a");  // Abre o arquivo para adicionar novos pedidos
-    if (file == NULL) {
-        printf("Erro ao abrir o arquivo de pedidos.\n");
-        return;
-    }
-
-    while (qntPizza > 0){
-        printf("Pizzas disponíveis: \n");
-        printList(pizzaList);
-
-        printf("Digite o nome da pizza desejada: ");
-        scanf(" %[^\n]", pizzaName);
-
-        printf("Digite o tamanho da pizza desejada (P, M, G, F): ");
-        scanf(" %[^\n]", pizzaSize);
-
-         Node *aux = pizzaList;
-         while(aux != NULL){
-            if(strcmp(aux->pizza.flavor, pizzaName) == 0 && strcmp(aux->pizza.size, pizzaSize) == 0 && (aux->pizza.qtdInStock>0)){
-                if(aux->pizza.qtdInStock > 0) {
-                    order.pizza = aux;  // pizza = Nó
-                    order.qtdOrder = 1;  
-                    enqueue(queue, order);  // Adiciona o pedido na fila
-                    aux->pizza.qtdInStock--;  
-                    printf("Pedido de %s (%s) adicionado com sucesso!\n", pizzaName, pizzaSize);
-
-                    fprintf(file, "Cliente: %s\n", order.nameClient);
-                    fprintf(file, "Pedido: %s (%s)\n", order.pizza->pizza.flavor, order.pizza->pizza.size,order.pizza->pizza.price);
-                    fprintf(file, "Preço: %.2f\n", order.pizza->pizza.price);
-                    fprintf(file, "\n");
-                    qntPizza--;  
-                    break;
-                } else {
-                    printf("Desculpe, a pizza %s (%s) não está disponível no momento.\n", pizzaName, pizzaSize);
-                    return;
-                }
-            }
-            aux = aux->next;
-        }
-        if(aux == NULL){
-            printf("Pizza %s (%s) não encontrada!\n", pizzaName, pizzaSize);
-            return;
-        }
-    }
-    fclose(file);
-}
-
-void noordered_printQueue(Queue *queue) {
+void printQueue(Queue *queue){
     QueueNode *current = queue->front;
-
-    if (current == NULL) {
-        printf("A fila está vazia.\n");
-        return;
-    }
-
-    printf("Fila de Pedidos:\n");
+    Node *aux;
     while (current != NULL) {
         printf("Cliente: %s\n", current->data.nameClient);
-        printf("Pedido: %s (%s)\n", current->data.pizza->pizza.flavor, current->data.pizza->pizza.size);
-        printf("\n");
+        aux = current->data.pizza;
+        while (aux != NULL) {
+            printf("Sabor: %s\n", aux->pizza.flavor);
+            printf("Tamanho: %s\n", aux->pizza.size);
+            aux = aux->next;
+        }
         current = current->next;
     }
-}
-
-void ordedprintQueue(Queue *queue) {
-    QueueNode *current = queue->front;
-    char lastClientName[100] = "";  // Para armazenar o nome do cliente anterior
-    int sameClient = 0;  // Flag para indicar se o cliente é o mesmo do pedido anterior
-
-    if (current == NULL) {
-        printf("A fila está vazia.\n");
-        return;
-    }
-
-    printf("Fila de Pedidos:\n");
-    while (current != NULL) {
-        if (strcmp(current->data.nameClient, lastClientName) != 0) {
-            strcpy(lastClientName, current->data.nameClient);
-            sameClient = 0;
-        }
-        if (sameClient == 0) {
-            printf("Cliente: %s\n", current->data.nameClient);
-            sameClient = 1;
-        }
-        printf("Pedido: %s (%s)\n", current->data.pizza->pizza.flavor, current->data.pizza->pizza.size);
-        current = current->next;
-    }
-}
-
-Order dequeueorder(Queue *queue){
-    if(isEmpty(queue)){
-        printf("A fila de pedidos está vazia!\n");
-        Order emptyOrder;  // Cria uma ordem vazia para retornar
-        strcpy(emptyOrder.nameClient, "");  // Inicializa o nome do cliente como vazio
-        emptyOrder.qtdOrder = 0;  // Inicializa a quantidade de pedidos como zero
-        emptyOrder.pizza = NULL;  // Inicializa a pizza como NULL
-        return emptyOrder;
-    }
-
-    QueueNode *temp = queue->front;
-    Order data = temp->data;
-    queue->front = queue->front->next;
-    free(temp);
-    if(queue->front == NULL){
-        queue->rear = NULL;
-    }
-    return data;
 }

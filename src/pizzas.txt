@@ -5,16 +5,16 @@ Tamanho: P
 Quantidade em estoque: 5
 
 Sabor: Alho
-Valor: 78.00
-Descrição: ksks
-Tamanho: M
-Quantidade em estoque: 6
-
-Sabor: Alho
 Valor: 69.00
 Descrição: ksks
 Tamanho: G
 Quantidade em estoque: 5
+
+Sabor: Alho
+Valor: 78.00
+Descrição: ksks
+Tamanho: M
+Quantidade em estoque: 6
 
 Sabor: Azeitona
 Valor: 40.00
@@ -45,6 +45,12 @@ Valor: 44.00
 Descrição: Ooo
 Tamanho: G
 Quantidade em estoque: 2
+
+Sabor: Peperone
+Valor: 56.00
+Descrição: Ksks
+Tamanho: G
+Quantidade em estoque: 8
 
 Sabor: S
 Valor: 90.00

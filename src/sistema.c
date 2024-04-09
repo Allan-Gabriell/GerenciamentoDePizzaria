@@ -1,7 +1,4 @@
 #include "../include/sistema.h"
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
 
 int containsOnlyLetters(char *str){
     for(int index =0; str[index] != '\0'; index++){
