@@ -1,0 +1,10 @@
+Cliente: Leonardo
+Sabor: Alho
+Tamanho: P
+Sabor: S
+Tamanho: P
+
+Cliente: Allan
+Sabor: S
+Tamanho: P
+

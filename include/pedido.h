@@ -13,5 +13,6 @@ void enqueue(Queue *queue);
 Node *orderListPizza(Node * list, Pizza new);
 Node* searchPizzaOrderByFlavor(Node* head, char* flavor);
 void printQueue(Queue *queue);
+void printOrdertxt(Queue *queue);
 
 #endif //PEDIDO

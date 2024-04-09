@@ -81,6 +81,7 @@ void enqueue(Queue *queue){ // Inserir
 
     printf("Pedido realizado com sucesso!\n");
     printQueue(queue);
+    printOrdertxt(queue);
 }
 
 Node *orderListPizza(Node * list, Pizza new){
@@ -118,4 +119,28 @@ void printQueue(Queue *queue){
         }
         current = current->next;
     }
+}
+
+void printOrdertxt(Queue *queue){
+    FILE *Ordertxt = fopen("pizzaria.txt", "w");
+    if(Ordertxt == NULL){
+        printf("Erro ao abrir o arquivo! \n");
+        return;
+    } 
+
+    QueueNode *current = queue->front;
+    Node *aux;
+    while (current != NULL) {
+        fprintf(Ordertxt, "Cliente: %s\n", current->data.nameClient);
+        aux = current->data.pizza;
+        while (aux != NULL) {
+            fprintf(Ordertxt, "Sabor: %s\n", aux->pizza.flavor);
+            fprintf(Ordertxt, "Tamanho: %s\n", aux->pizza.size);
+            aux = aux->next;
+        }
+        current = current->next;
+        fprintf(Ordertxt, "\n");
+    }
+    
+    fclose(Ordertxt);
 }
