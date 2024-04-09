@@ -1,11 +1,37 @@
-Sabor: Azeitona
-Valor: 90.00
-Descrição: kkksks
-Tamanho: G
-Quantidade em estoque: 2
-
-Sabor: Peperone
+Sabor: Alho
 Valor: 56.00
+Descrição: ksksk
+Tamanho: P
+Quantidade em estoque: 5
+
+Sabor: Alho
+Valor: 69.00
+Descrição: ksks
+Tamanho: G
+Quantidade em estoque: 5
+
+Sabor: Alho
+Valor: 78.00
 Descrição: ksks
 Tamanho: M
-Quantidade em estoque: 5
+Quantidade em estoque: 6
+
+Sabor: Azeitona
+Valor: 40.00
+Descrição: Não gosto
+Tamanho: M
+Quantidade em estoque: 14
+
+Sabor: Chocolate
+Valor: 66.00
+Descrição: kskks
+Tamanho: G
+Quantidade em estoque: 10
+
+Sabor: Frango
+Valor: 75.00
+Descrição: kkskssk
+Tamanho: a
+Quantidade em estoque: 85
+
+Fim arquivo

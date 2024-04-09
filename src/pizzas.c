@@ -9,8 +9,9 @@ struct node{
     struct node *next;
 };
 
-Node *addPizza(Node *list) {
+Node *addPizza() {
     char decision[3];
+    Node *list = loadPizzas();
     printList(list);
     do {
         Pizza newPizza;
@@ -52,6 +53,7 @@ Node *addPizza(Node *list) {
             exit(1);
         }
         newNode->pizza = newPizza;
+        newNode->next = NULL; // Adicionado para garantir que o próximo nó seja NULL
 
         // Inserir o novo nó em ordem alfabética
         if(list == NULL || strcmp(newPizza.flavor, list->pizza.flavor) < 0){
@@ -98,23 +100,31 @@ void printList(Node *list) {
     }
 }
 
-void printListPizzas(Node *list) {
+void printListPizzas() {
+    Node *list = loadPizzas();
     if(list == NULL){
         printf("Lista vazia!\n");
         return;
+    } else{
+        printf("Lista de pizzas:\n");
+        Node *current = list;
+        while(current != NULL) {
+            printf("Sabor: %s\n", current->pizza.flavor);
+            printf("Tamanho: %s\n", current->pizza.size);
+            printf("Quantidade disponível: %d\n\n", current->pizza.qtdInStock);
+            current = current->next;
+        }
     }
 }
 
-Node *removePizza(Node *list) {
-    FILE *file = fopen("pizzas.txt", "r+");
-    if(file == NULL){
-        printf("Erro ao abrir o arquivo\n");
-        return list;
-    }
+
+Node *removePizza() {
     char decision[3];
+    Node *list = loadPizzas();
     do {
         char flavor[50];
         char size[50];
+        printList(list);
         printf("Informe o sabor da pizza a ser removida: ");
         scanf(" %[^\n]", flavor);
         printf("Informe o tamanho da pizza a ser removida (P, M, G, F): ");
@@ -131,6 +141,7 @@ Node *removePizza(Node *list) {
                 }
                 free(aux);
                 printf("Sabor removido com sucesso!\n");
+                printList(list);
                 break;
             }
             prev = aux;
@@ -145,19 +156,15 @@ Node *removePizza(Node *list) {
     } while(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0);
 
     printTxt(list);
-    fclose(file);
     return list;
 }
 
-void editPizza(Node *list) {
-    FILE *file = fopen("pizzas.txt", "r+");
-    if(file == NULL){
-        printf("Erro ao abrir o arquivo\n");
-        return;
-    }
+void editPizza() {
+    Node *list = loadPizzas();
     char decision[3];
     int newQtdInStock;
     do {
+        printList(list);
         char flavor[50];
         printf("Informe o sabor da pizza a ser editada: ");
         scanf(" %[^\n]", flavor);
@@ -178,6 +185,7 @@ void editPizza(Node *list) {
                     scanf("%d", &newQtdInStock);
                     aux->pizza.qtdInStock += newQtdInStock;
                 }
+                printList(list);
                 printf("Sabor editado com sucesso!\n");
                 break;
             }
@@ -192,10 +200,10 @@ void editPizza(Node *list) {
     } while(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0);
 
     printTxt(list);
-    fclose(file);
 }
 
-void searchPizzaByName(Node *list) {
+void searchPizzaByName() {
+    Node *list = loadPizzas();
     char decision[3];
     do {
         char flavor[50];
@@ -251,6 +259,7 @@ void printTxt(Node *list) {
             fprintf(file, "\n");
             newList = newList->next;
         }
+        fprintf(file, "Fim arquivo\n");
     }
 
     fclose(file);
@@ -263,10 +272,22 @@ Node *loadPizzas() {
         return NULL;
     }
 
-    Node *list = NULL;
     Pizza newPizza;
+    Node *list = NULL;
 
-    while(fscanf(file, "Sabor: %[^\n]\nValor: %f\nDescrição: %[^\n]\nTamanho: %[^\n]\nQuantidade em estoque: %d\n\n", newPizza.flavor, &newPizza.price, newPizza.description, newPizza.size, &newPizza.qtdInStock) == 5) {
+    char price[40];
+    char stock[40];
+    char line[15];
+    fscanf(file, "%s", line);
+    while(strstr(line, "Sabor") != NULL){
+        fscanf(file, " %[^\n]\n", newPizza.flavor);
+        fscanf(file, "Valor: %[^\n]\n", price);
+        fscanf(file, "Descrição: %[^\n]\n", newPizza.description);
+        fscanf(file, "Tamanho: %[^\n]\n", newPizza.size);
+        fscanf(file, "Quantidade em estoque: %[^\n]\n\n", stock);
+        newPizza.price = atof(price); //um para %f e outro para %d
+        newPizza.qtdInStock = atoi(stock);
+
         Node *newNode = (Node *) malloc(sizeof(Node));
         if(newNode == NULL){
             printf("Erro ao alocar memoria");
@@ -287,7 +308,10 @@ Node *loadPizzas() {
             newNode->next = current->next;
             current->next = newNode;
         }
+
+        fscanf(file, "%s", line); // Mova esta linha para aqui
     }
+    
 
     fclose(file);
     return list;

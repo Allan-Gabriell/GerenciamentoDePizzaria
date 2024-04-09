@@ -19,18 +19,18 @@ typedef struct pizza Pizza;
 typedef struct node Node;
 
 //Crio minha função do tipo node, recebe um ponteiro do tipo Node e é resposável por adicionar uma nova pizza a minha lista de pizzas
-Node *addPizza(Node *list);
+Node *addPizza();
 //Minha função do tipo void é a resposável por printar a lista de pizzas para o usuário
 void printList(Node *list);
 //Minha função do tipo Node é a responsável por remover uma pizza da lista de pizzas
-Node *removePizza(Node *list);
+Node *removePizza();
 //Minha função do tipo void é a resposável por editar uma pizza da lista de pizzas
-void editPizza(Node *list);
+void editPizza();
 //Minha função do tipo void é a responsável por pesquisar uma pizza pelo nome
-void searchPizzaByName(Node *list);
+void searchPizzaByName();
 //Minha função do tipo void é a responsável por adicionar a lista de pizzas no arquivo .txt
 void printTxt(Node *list);
 //Minha função que verifica se minha lista está vazia
-void printListPizzas(Node *list);
+void printListPizzas();
 Node *loadPizzas();
 #endif // PIZZAS_H_INCLUDED

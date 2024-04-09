@@ -42,7 +42,7 @@ void menu(){
                     printf("Deseja adicionar uma nova pizza? (s/n) \n");
                     scanf(" %[^\n]", decision);
                     if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
-                        head = addPizza(head);
+                        head = addPizza();
                     } else {
                         menu(head);
                     }
@@ -51,7 +51,7 @@ void menu(){
                     printf("Deseja remover uma pizza? (s/n) \n");
                     scanf(" %[^\n]", decision);
                     if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
-                        head = removePizza(head);
+                        head = removePizza();
                     } else {
                         menu(head);
                     }
@@ -78,7 +78,7 @@ void menu(){
                     printf("Deseja editar uma pizza? (s/n) \n");
                     scanf(" %[^\n]", decision);
                     if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
-                        editPizza(head);
+                        editPizza();
                     } else {
                         menu(head);
                     }
@@ -87,7 +87,7 @@ void menu(){
                     printf("Deseja buscar pizza por sabor? (s/n) \n");
                     scanf(" %[^\n]", decision);
                     if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
-                        searchPizzaByName(head);
+                        searchPizzaByName();
                         printList(head);
                     } else {
                         menu(head);
@@ -97,7 +97,7 @@ void menu(){
                     printf("Deseja ver pizzas e quantidade em estoque? (s/n) \n");
                     scanf(" %[^\n]", decision);
                     if(strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0){
-                        printListPizzas(head);
+                        printListPizzas();
                     } else {
                         menu(head);
                     }
@@ -115,9 +115,8 @@ void menu(){
 }
 
 int main(void){
-
     
-    menu();
+   menu();
 
 
     return 0;
