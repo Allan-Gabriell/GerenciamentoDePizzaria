@@ -1,20 +1,20 @@
-Alho
-56.00
-Alho Molho Massa Cebolas E Tomates
-P
-10
-Azeitona
-66.00
-Ksks
-M
-8
-Peperone
-55.00
-Ksks
-F
-8
-Peperone
-55.00
-Ksks
+Alho 
+15.64
+Uma Pizza De Alho
+G
+15
+Frango Com Catupiry
+20.40
+Uma Pizza De Frango Com Catupiry
+G
+20
+Napolitana
+18.30
+Uma Pizza Napolitana
+G
+14
+Napolitana
+12.20
+Uma Pizza Napolitana
 M
 8

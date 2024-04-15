@@ -1,0 +1,5 @@
+Cliente: Carlos
+Pizzas pedidas:
+ - Sabor: Napolitana, Tamanho: M, Quantidade: 2, Preço(Unidade): 12.20
+Total do pedido: R$ 24.40
+----------------------------------

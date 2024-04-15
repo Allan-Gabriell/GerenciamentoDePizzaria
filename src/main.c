@@ -7,8 +7,6 @@ void menu()
     int num;
     char decision[3];
 
-    Queue *orderPizza = createQueue();
-
     do
     {
         printf("===== Bem vindo ao nosso sistema de pizzaria =====\n");
@@ -25,20 +23,16 @@ void menu()
         scanf("%s", option);
 
         int isNumber = 1;
-        for (int i = 0; i < strlen(option); i++)
-        {
-            if (!isdigit(option[i]))
-            {
+        for (int i = 0; i < strlen(option); i++){
+            if (!isdigit(option[i])){
                 isNumber = 0;
                 break;
             }
         }
 
-        if (isNumber)
-        {
+        if (isNumber){
             num = atoi(option);
-            switch (num)
-            {
+            switch (num){
             case 1:
                 printf("Deseja adicionar uma nova pizza? (s/n) \n");
                 scanf(" %[^\n]", decision);
@@ -56,7 +50,7 @@ void menu()
                 scanf(" %[^\n]", decision);
                 if (strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0)
                 {
-                    dequeue(orderPizza);
+                    removePizza();
                 }
                 else
                 {
@@ -68,7 +62,7 @@ void menu()
                 scanf(" %[^\n]", decision);
                 if (strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0)
                 {
-                    enqueue(orderPizza);
+                    makeOrder();
                 }
                 else
                 {
@@ -80,7 +74,7 @@ void menu()
                 scanf(" %[^\n]", decision);
                 if (strcmp(decision, "s") == 0 || strcmp(decision, "S") == 0 || strcmp(decision, "sim") == 0 || strcmp(decision, "Sim") == 0 || strcmp(decision, "SIM") == 0)
                 {
-                    // dequeueorder(orderPizza);
+                    removeOrder();
                 }
                 else
                 {
